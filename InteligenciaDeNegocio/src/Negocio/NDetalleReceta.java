@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Negocio;
 
 import Data.DDetalleReceta;
@@ -26,8 +30,8 @@ public class NDetalleReceta {
           
             try {
             dato.setId(Integer.valueOf(parametros.get(0)));
-            dato.setNombreProducto(parametros.get(8));
-            dato.setIndicaciones(parametros.get(9));
+            dato.setNombre(parametros.get(1));
+            dato.setIndicaciones(parametros.get(2));
                 dato.insertar();
             } catch (SQLException ex) {
                 java.util.logging.Logger.getLogger(NDetalleReceta.class.getName()).log(Level.SEVERE, null, ex);
@@ -43,8 +47,8 @@ public class NDetalleReceta {
     try{
         
             dato.setId(Integer.valueOf(parametros.get(0)));
-            dato.setNombreProducto(parametros.get(8));
-            dato.setIndicaciones(parametros.get(9));
+            dato.setNombre(parametros.get(1));
+            dato.setIndicaciones(parametros.get(2));
             dato.editar();
     }catch(SQLException ex){
      java.util.logging.Logger.getLogger(NDetalleReceta.class.getName()).log(Level.SEVERE, null, ex);
@@ -94,3 +98,4 @@ public class NDetalleReceta {
         return d;
     }
 }
+

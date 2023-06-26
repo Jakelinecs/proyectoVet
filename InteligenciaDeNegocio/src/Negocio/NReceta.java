@@ -1,3 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 
 
 package Negocio;
@@ -20,33 +26,15 @@ public class NReceta implements INegocio{
      public NReceta(){
          dato = new DReceta();
      }
-     /*
-pr.setInt(1, id);
-    pr.setInt(2, idpaciente);
-    pr.setInt(3, idmedico);
-    pr.setInt(4, idservicio);
-    pr.setInt(5, idDetalleReceta);
-    pr.setString(6, paciente);
-    pr.setInt(7, edad);
-    pr.setDate(8,getDate(fecha));
-    pr.setString(9, diagnostico);
-    pr.setString(10, indicaciones);*/
     @Override
     public void insertar(List<String> parametros, String email) {
   
           
             try {
             dato.setId(Integer.valueOf(parametros.get(0)));
-            dato.setIdpaciente(Integer.valueOf(parametros.get(1)));
-            dato.setIdmedico(Integer.valueOf(parametros.get(2)));
-            dato.setIdservicio(Integer.valueOf(parametros.get(3)));
-            dato.setIdDetalleReceta(Integer.valueOf(parametros.get(4)));
-            
-            dato.setPaciente(parametros.get(5));
-            dato.setEdad(Integer.valueOf(parametros.get(6)));
-            dato.setFecha(parametros.get(7));
-            dato.setIndicaciones(parametros.get(9));
-                //solo esto cambia en todos?
+            dato.setNumeroRecetario(Integer.valueOf(parametros.get(1)));
+            dato.setEstado(parametros.get(2));
+          
                 dato.insertar();
             } catch (SQLException ex) {
                 java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,15 +51,8 @@ pr.setInt(1, id);
     try{
         
             dato.setId(Integer.valueOf(parametros.get(0)));
-            dato.setIdpaciente(Integer.valueOf(parametros.get(1)));
-            dato.setIdmedico(Integer.valueOf(parametros.get(2)));
-            dato.setIdservicio(Integer.valueOf(parametros.get(3)));
-            dato.setIdDetalleReceta(Integer.valueOf(parametros.get(4)));
-            
-            dato.setPaciente(parametros.get(5));
-            dato.setEdad(Integer.valueOf(parametros.get(6)));
-            dato.setFecha(parametros.get(7));
-            dato.setIndicaciones(parametros.get(9));
+            dato.setNumeroRecetario(Integer.valueOf(parametros.get(1)));
+            dato.setEstado(parametros.get(2));
             dato.editar();
     }catch(SQLException ex){
      java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
