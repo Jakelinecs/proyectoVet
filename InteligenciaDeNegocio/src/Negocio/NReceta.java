@@ -9,7 +9,6 @@
 package Negocio;
 
 import Data.DReceta;
-import com.sun.istack.internal.logging.Logger;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;

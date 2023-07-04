@@ -4,9 +4,12 @@
  */
 package inteligenciadenegocio;
 
+import Negocio.NCategoria;
 import Negocio.NPaciente;
 import Negocio.NPersona;
+import Negocio.NProducto;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -35,7 +38,7 @@ public class InteligenciaDeNegocio {
         persona.add("B/ la fortaleza");
         negocio.insertar(persona,email);
         */
-        
+    /*    
         NPaciente negocioP = new NPaciente();
         
         List<String> paciente= new ArrayList<>();
@@ -49,7 +52,16 @@ public class InteligenciaDeNegocio {
         paciente.add("2018-09-14");
         paciente.add("1");
         negocioP.insertar(paciente,email);
-        
+        */
+        NProducto negocio = new NProducto();
+
+        List<String[]> lista = negocio.listar(email);
+        for (String[] dato : lista) {
+            System.out.println(Arrays.toString(dato));
+        }
+    
+    
+    
         
     }
     

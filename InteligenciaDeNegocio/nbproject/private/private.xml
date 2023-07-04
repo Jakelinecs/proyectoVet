@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/inteligenciadenegocio/InteligenciaDeNegocio.java</file>
-            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Negocio/NPaciente.java</file>
-            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Utlis/DateString.java</file>
-            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Data/DPaciente.java</file>
-            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Data/DPersona.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Negocio/NCategoria.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Data/DContrato.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Data/DCategoria.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Negocio/NContrato.java</file>
         </group>
     </open-files>
 </project-private>

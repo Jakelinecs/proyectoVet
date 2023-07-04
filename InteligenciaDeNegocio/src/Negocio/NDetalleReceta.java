@@ -30,7 +30,7 @@ public class NDetalleReceta {
           
             try {
             dato.setId(Integer.valueOf(parametros.get(0)));
-            dato.setNombre(parametros.get(1));
+            dato.setNombreProducto(parametros.get(1));
             dato.setIndicaciones(parametros.get(2));
                 dato.insertar();
             } catch (SQLException ex) {
@@ -47,7 +47,7 @@ public class NDetalleReceta {
     try{
         
             dato.setId(Integer.valueOf(parametros.get(0)));
-            dato.setNombre(parametros.get(1));
+            dato.setNombreProducto(parametros.get(1));
             dato.setIndicaciones(parametros.get(2));
             dato.editar();
     }catch(SQLException ex){
