@@ -3,9 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-
 package Negocio;
 
 import Data.DReceta;
@@ -19,55 +16,56 @@ import java.util.logging.Level;
  *
  * @author Marina
  */
-public class NReceta implements INegocio{
-     private DReceta dato;
-     
-     public NReceta(){
-         dato = new DReceta();
-     }
+public class NReceta implements INegocio {
+
+    private DReceta dato;
+
+    public NReceta() {
+        dato = new DReceta();
+    }
+
     @Override
     public void insertar(List<String> parametros, String email) {
-  
-          
-            try {
-            dato.setId(Integer.valueOf(parametros.get(0)));
+
+        try {
+            dato.setIdatencion(Integer.valueOf(parametros.get(0)));
             dato.setNumeroRecetario(Integer.valueOf(parametros.get(1)));
             dato.setEstado(parametros.get(2));
-          
-                dato.insertar();
-            } catch (SQLException ex) {
-                java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-             java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
-         }
-            
-    
-        
+
+            dato.setCorreo(email);
+
+            dato.insertar();
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @Override
     public void editar(List<String> parametros, String email) {
-    try{
-        
+        try {
+
             dato.setId(Integer.valueOf(parametros.get(0)));
             dato.setNumeroRecetario(Integer.valueOf(parametros.get(1)));
             dato.setEstado(parametros.get(2));
             dato.editar();
-    }catch(SQLException ex){
-     java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
 
-    }
+        }
     }
 
     @Override
     public void eliminar(List<String> parametros, String email) {
-        try{
+        try {
             dato.setId(Integer.valueOf(parametros.get(0)));
             dato.setCorreo(email);
             dato.eliminar();
-            
-        }catch(SQLException ex){
-        java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
 
         }
 
@@ -77,31 +75,30 @@ public class NReceta implements INegocio{
     public List<String[]> listar(String email) {
         List<String[]> lista = new ArrayList<>();
         dato.setCorreo(email);
-        try{
+        try {
             lista = dato.listar();
-            
-        }catch(SQLException ex){
-         java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
 
         }
         return lista;
-        
+
     }
 
     @Override
     public String[] ver(List<String> parametros, String email) {
-        String[]d = null;
-        try{
+        String[] d = null;
+        try {
             dato.setCorreo(email);
             dato.setId(Integer.valueOf(parametros.get(0)));
-            d= dato.ver();
-            
+            d = dato.ver();
+
         } catch (SQLException ex) {
-             java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
-         }
+            java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         return d;
     }
-    
-    
+
 }

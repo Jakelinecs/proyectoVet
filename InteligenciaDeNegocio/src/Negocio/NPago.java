@@ -1,6 +1,4 @@
-
 package Negocio;
-
 
 import Data.DPago;
 import java.sql.SQLException;
@@ -14,56 +12,51 @@ import java.util.logging.Logger;
  *
  * @author Marina
  */
-public class NPago implements INegocio{
-    
-    
+public class NPago implements INegocio {
+
     private DPago dato;
 
     public NPago() {
-        dato= new DPago();
+        dato = new DPago();
     }
-    
 
     @Override
-    public void insertar(List<String> parametros,String email) {
+    public void insertar(List<String> parametros, String email) {
         try {
             // "id","correo","numeroReferencia","monto","fecha","nombre","metodoPago","descricpion","estadoPago"};
 
-            dato.setId(Integer.valueOf(parametros.get(0)));
-            dato.setNumeroReferencia(Integer.valueOf(parametros.get(1)));
-            dato.setMonto(Integer.valueOf(parametros.get(2)));
-            dato.setFecha(parametros.get(3));
-            dato.setMetodoPago(parametros.get(4));
-            dato.setDescripcion(parametros.get(5));
-            dato.setEstadoPago(parametros.get(6));
-            
+            dato.setIdservicio(Integer.valueOf(parametros.get(0)));
+            dato.setNumero_referencia(parametros.get(1));
+            dato.setNombre(parametros.get(2));
+            dato.setMonto(Double.valueOf(parametros.get(3)));
+            dato.setFecha(parametros.get(4));
+            dato.setMetodo_pago(parametros.get(5));
+            dato.setDescripcion(parametros.get(6));
+            dato.setEstado_pago(parametros.get(7));
+
             dato.setCorreo(email);
-            
+
             dato.insertar();
             dato.desconectar();
-    
-        
-   
 
-    }   catch (SQLException ex) {
-            Logger.getLogger(NPago.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(NPago.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        @Override
-    public void editar(List<String> parametros,String email) {
+
+    @Override
+    public void editar(List<String> parametros, String email) {
         try {
             dato.setId(Integer.valueOf(parametros.get(0)));
-            dato.setNumeroReferencia(Integer.valueOf(parametros.get(1)));
-            dato.setMonto(Integer.valueOf(parametros.get(2)));
+            dato.setNumero_referencia(parametros.get(1));
+            dato.setMonto(Double.valueOf(parametros.get(2)));
             dato.setFecha(parametros.get(3));
-            dato.setMetodoPago(parametros.get(4));
+            dato.setMetodo_pago(parametros.get(4));
             dato.setDescripcion(parametros.get(5));
-            dato.setEstadoPago(parametros.get(6));
-            
+            dato.setEstado_pago(parametros.get(6));
+
             dato.setCorreo(email);
-            
+
             dato.editar();
             dato.desconectar();
         } catch (SQLException ex) {
@@ -71,12 +64,11 @@ public class NPago implements INegocio{
         }
     }
 
-   
-    public void eliminar(List<String> parametros,String email) {
+    public void eliminar(List<String> parametros, String email) {
         try {
             dato.setId(Integer.valueOf(parametros.get(0)));
             dato.setCorreo(email);
-            
+
             dato.eliminar();
             dato.desconectar();
         } catch (SQLException ex) {
@@ -86,8 +78,8 @@ public class NPago implements INegocio{
 
     @Override
     public List<String[]> listar(String email) {
-       List<String[]> lista = new ArrayList<>();
-       dato.setCorreo(email);
+        List<String[]> lista = new ArrayList<>();
+        dato.setCorreo(email);
         try {
             lista = dato.listar();
             dato.desconectar();
@@ -98,12 +90,12 @@ public class NPago implements INegocio{
     }
 
     @Override
-    public String[] ver(List<String> parametros,String email) {
+    public String[] ver(List<String> parametros, String email) {
         String[] d = null;
         try {
             dato.setCorreo(email);
             dato.setId(Integer.valueOf(parametros.get(0)));
-            
+
             d = dato.ver();
             dato.desconectar();
         } catch (SQLException ex) {
@@ -111,7 +103,5 @@ public class NPago implements INegocio{
         }
         return d;
     }
-    
-    
-}
 
+}

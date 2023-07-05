@@ -25,8 +25,10 @@ public class DActivo {
     private int id;
     private String nombre;
     private String detalle;
-    private Date f_adquisicion;
-    private Date f_mantenimiento;
+//    private Date f_adquisicion;
+    private String f_adquisicion;
+ //   private Date f_mantenimiento;
+    private String f_mantenimiento;
     private boolean estado;
     String created_at, updated_at;
 
@@ -50,11 +52,14 @@ public class DActivo {
     }
 
     public void setF_adquisicion(String f_adquisicion) {
-        this.f_adquisicion = getDate(f_adquisicion);
+        //this.f_adquisicion = getDate(f_adquisicion);
+        this.f_adquisicion = f_adquisicion;
+        
     }
 
     public void setF_mantenimiento(String f_mantenimiento) {
-        this.f_mantenimiento = getDate(f_mantenimiento);
+//        this.f_mantenimiento = getDate(f_mantenimiento);
+        this.f_mantenimiento = f_mantenimiento;
     }
 
     // Getters y setters para los atributos
@@ -96,8 +101,8 @@ public class DActivo {
             PreparedStatement ps = conn.conectar().prepareStatement(sql);
             ps.setString(1, nombre);
             ps.setString(2, detalle);
-            ps.setDate(3, new java.sql.Date(f_adquisicion.getTime()));
-            ps.setDate(4, new java.sql.Date(f_mantenimiento.getTime()));
+            ps.setDate(3, getDate(f_adquisicion));
+            ps.setDate(4, getDate(f_mantenimiento));
             ps.setBoolean(5, estado);
             ps.setDate(6, new java.sql.Date(getDate(created_at).getTime()));
             ps.setDate(7, new java.sql.Date(getDate(updated_at).getTime()));
@@ -117,8 +122,8 @@ public class DActivo {
             PreparedStatement ps = conn.conectar().prepareStatement(sql);
             ps.setString(1, nombre);
             ps.setString(2, detalle);
-            ps.setDate(3, new java.sql.Date(f_adquisicion.getTime()));
-            ps.setDate(4, new java.sql.Date(f_mantenimiento.getTime()));
+            ps.setDate(3, getDate(f_adquisicion));
+            ps.setDate(4, getDate(f_mantenimiento));
             ps.setBoolean(5, estado);
             ps.setDate(6, new java.sql.Date(getDate(updated_at).getTime()));
             ps.setInt(7, id);
@@ -192,15 +197,28 @@ public class DActivo {
         }
         return activo;
     }
-
-    public Date getDate(String date) {
-        Calendar c = DateString.StringToDate(date);
-        return new Date(c.getTimeInMillis());
-    }
-
     public void desconectar() {
         if (conn != null) {
             conn.closeConection();
         }
     }
+    
+    public java.sql.Date getDate(String date){
+    Calendar c = DateString.StringToDate(date);
+    long x = c.getTimeInMillis();
+      System.out.println(x);
+      java.sql.Date dateSQL =new java.sql.Date(x);
+        System.out.println(dateSQL.toString());
+    return dateSQL;
+    }
+    
+    public java.sql.Date getDateTime(String date){
+    Calendar c = DateString.StringToDateTime(date);
+    long x = c.getTimeInMillis();
+      System.out.println(x);
+      java.sql.Date dateSQL =new java.sql.Date(x);
+        System.out.println(dateSQL.toString());
+    return dateSQL;
+    }
+    
 }

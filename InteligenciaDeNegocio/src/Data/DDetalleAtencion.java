@@ -20,60 +20,58 @@ public class DDetalleAtencion {
     idReceta
  
      */
-    ClientPsql coneccion;
+    ClientPsql conn;
     DUsers us;//campo de usuario, reconocedor de correo
     //agregar pago,detalleprocedimiento
-    int id, idAtencionClinica, idReceta;
-    String pago, detalleProcedimiento;
+    private int id;
+    private int idAtencion;
+    private String detalleProcedimiento;
+    private double costo;
     String correo;
 
     public static final String[] headers
             = {
-                "id", "idAtncionClinica", "idReceta"};
+                "id", "idAtncionClinica", "detalle", "costo"};
 
     public DDetalleAtencion() {
-        coneccion = new ClientPsql();
+        conn = new ClientPsql();
+        us = new DUsers();
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setIdAtencionClinica(int idAtencionClinica) {
-        this.idAtencionClinica = idAtencionClinica;
-    }
-
-    public void setIdReceta(int idReceta) {
-        this.idReceta = idReceta;
-    }
-
-    public void setPago(String pago) {
-        this.pago = pago;
+    public void setIdAtencion(int idAtencion) {
+        this.idAtencion = idAtencion;
     }
 
     public void setDetalleProcedimiento(String detalleProcedimiento) {
         this.detalleProcedimiento = detalleProcedimiento;
     }
 
+    public void setCosto(double costo) {
+        this.costo = costo;
+    }
+
     public void setCorreo(String correo) {
         this.correo = correo;
     }
 
-    public void insertar() throws SQLException, ParseException {
+    public void insertar() throws SQLException {
 
         int dato;
 
         dato = us.getIdByEmail(correo);//compara si existe
         if (dato != -1) {
-            String sql = "insert into detalleAtencion(id,idAtencionClinica,idReceta,pago,detalleProcedimiento)" + " Values(?,?,?,?,?)";
-            PreparedStatement pr = new ClientPsql().conectar().prepareStatement(sql);
-            pr.setInt(1, id);
-            pr.setInt(2, idAtencionClinica);
-            pr.setInt(3, idReceta);
-            pr.setString(4, pago);
-            pr.setString(5, detalleProcedimiento);
+            String sql = "INSERT INTO detalle_atencions (id, idatencion, detalle_procedimiento, costo) "
+                    + "VALUES (DEFAULT, ?, ?, ?)";
+            PreparedStatement ps = conn.conectar().prepareStatement(sql);
+            ps.setInt(1, idAtencion);
+            ps.setString(2, detalleProcedimiento);
+            ps.setDouble(3, costo);
 
-            if (pr.executeUpdate() == 0) {
+            if (ps.executeUpdate() == 0) {
                 System.out.println("Ocurrio un error");
             }
 
@@ -85,17 +83,15 @@ public class DDetalleAtencion {
         int dato;
         dato = us.getIdByEmail(correo);
         if (dato != -1) {
-            String sql = "update detalleAtencion set pago=?"
-                    + "detalleProcedimiento=?"
-                    + "where id=?";
-            PreparedStatement pr = new ClientPsql().conectar().prepareStatement(sql);
-            pr.setInt(1, id);
-            pr.setInt(2, idAtencionClinica);
-            pr.setInt(3, idReceta);
-            pr.setString(4, pago);
-            pr.setString(5, detalleProcedimiento);
+            String sql = "UPDATE detalle_atencions SET idatencion=?, detalle_procedimiento=?, costo=? "
+                    + "WHERE id=?";
+            PreparedStatement ps = conn.conectar().prepareStatement(sql);
+            ps.setInt(1, idAtencion);
+            ps.setString(2, detalleProcedimiento);
+            ps.setDouble(3, costo);
+            ps.setInt(4, id);
 
-            if (pr.executeUpdate() == 0) {
+            if (ps.executeUpdate() == 0) {
                 System.out.println("Ocurrio un error");
             }
 
@@ -106,7 +102,7 @@ public class DDetalleAtencion {
         int dato;
         dato = us.getIdByEmail(correo);
         if (dato != -1) {
-            String sql = "delete from detalleAtencion where" + "id=?";
+            String sql = "delete from detalle_atencions where " + "id=?";
             PreparedStatement pr = new ClientPsql().conectar().prepareStatement(sql);
             pr.setInt(1, id);
 
@@ -122,20 +118,18 @@ public class DDetalleAtencion {
         int dato;
         dato = us.getIdByEmail(correo);
         if (dato != -1) {
-            String sql = "select *from detalleAtencion";
-            PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
-            ResultSet set = ps.executeQuery();
-            while (set.next()) {
-                lista.add(new String[]{
+             String sql = "SELECT * FROM detalle_atencions";
+        PreparedStatement ps = conn.conectar().prepareStatement(sql);
+        ResultSet set = ps.executeQuery();
+
+        while (set.next()) {
+            lista.add(new String[]{
                     String.valueOf(set.getInt("id")),
-                    String.valueOf(set.getInt("idpaciente")),
-                    String.valueOf(set.getInt("idmedico")),
-                    set.getString("pago"),
-                    set.getString("detalleProcedimiento")
-
-                });
-
-            }
+                    String.valueOf(set.getInt("idatencion")),
+                    set.getString("detalle_procedimiento"),
+                    String.valueOf(set.getDouble("costo"))
+            });
+        }
         }
         return lista;
     }
@@ -145,17 +139,16 @@ public class DDetalleAtencion {
         int dato;
         dato = us.getIdByEmail(correo);
         if (dato != -1) {
-            String sql = "select * from detalleAtencion WHERE id=?";
+            String sql = "select * from detalle_atencions WHERE id=?";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
             ps.setInt(0, id);
             ResultSet set = ps.executeQuery();
             if (set.next()) {
                 usuario = new String[]{
                     String.valueOf(set.getInt("id")),
-                    String.valueOf(set.getInt("idAtencionClinica")),
-                    String.valueOf(set.getInt("idReceta")),
-                    set.getString("pago"),
-                    set.getString("detalleProcedimiento")
+                    String.valueOf(set.getInt("idatencion")),
+                    String.valueOf(set.getInt("detalle_procedimiento")),
+                    set.getString("costo"),
                 };
             } else {
                 System.err.println("Class DPersona.java dice: "
@@ -168,8 +161,8 @@ public class DDetalleAtencion {
     }
 
     public void desconectar() {
-        if (coneccion != null) {
-            coneccion.closeConection();
+        if (conn != null) {
+            conn.closeConection();
         }
     }
 }

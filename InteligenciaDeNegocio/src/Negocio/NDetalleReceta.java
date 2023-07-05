@@ -17,7 +17,7 @@ import java.util.logging.Level;
  *
  * @author Marina
  */
-public class NDetalleReceta {
+public class NDetalleReceta implements INegocio {
     //nombreproducto,indicaciones -> tabladetalleReceta
         private DDetalleReceta dato;
 
@@ -32,6 +32,9 @@ public class NDetalleReceta {
             dato.setId(Integer.valueOf(parametros.get(0)));
             dato.setNombreProducto(parametros.get(1));
             dato.setIndicaciones(parametros.get(2));
+            
+            dato.setCorreo(email);
+            
                 dato.insertar();
             } catch (SQLException ex) {
                 java.util.logging.Logger.getLogger(NDetalleReceta.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,9 +49,12 @@ public class NDetalleReceta {
     public void editar(List<String> parametros, String email) {
     try{
         
-            dato.setId(Integer.valueOf(parametros.get(0)));
+            dato.setIdreceta(Integer.valueOf(parametros.get(0)));
             dato.setNombreProducto(parametros.get(1));
             dato.setIndicaciones(parametros.get(2));
+            
+            dato.setCorreo(email);
+            
             dato.editar();
     }catch(SQLException ex){
      java.util.logging.Logger.getLogger(NDetalleReceta.class.getName()).log(Level.SEVERE, null, ex);

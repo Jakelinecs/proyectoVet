@@ -30,7 +30,7 @@ public class NServicio implements INegocio {
             dato.setResponsable(parametros.get(0));
             dato.setIdpaciente(Integer.parseInt(parametros.get(1)));
             dato.setIdmedico(Integer.parseInt(parametros.get(2)));
-            dato.setFecha(dato.getDate(parametros.get(3)));
+            dato.setFecha(parametros.get(3));
             dato.setTotal(Double.parseDouble(parametros.get(4)));
             dato.setCreated_at();
             dato.setUpdated_at();
@@ -50,7 +50,7 @@ public class NServicio implements INegocio {
             dato.setResponsable(parametros.get(1));
             dato.setIdpaciente(Integer.parseInt(parametros.get(2)));
             dato.setIdmedico(Integer.parseInt(parametros.get(3)));
-            dato.setFecha(dato.getDate(parametros.get(4)));
+            dato.setFecha(parametros.get(4));
             dato.setTotal(Double.parseDouble(parametros.get(5)));
             dato.setUpdated_at();
             dato.setCorreo(email);

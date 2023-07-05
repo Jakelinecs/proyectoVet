@@ -27,7 +27,7 @@ public class DServicio {
     private String responsable;
     private int idpaciente;
     private int idmedico;
-    private Date fecha;
+    private String fecha;
     private double  total;
     String created_at, updated_at;
 
@@ -54,7 +54,7 @@ public class DServicio {
         this.idmedico = idmedico;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -97,7 +97,7 @@ public void insertar() throws SQLException {
             ps.setString(1, responsable);
             ps.setInt(2, idpaciente);
             ps.setInt(3, idmedico);
-            ps.setDate(4, new java.sql.Date(fecha.getTime()));
+            ps.setDate(4, getDate(fecha));
             ps.setDouble(5, total);
             ps.setDate(6, new java.sql.Date(getDate(created_at).getTime()));
             ps.setDate(7, new java.sql.Date(getDate(updated_at).getTime()));
@@ -118,7 +118,7 @@ public void insertar() throws SQLException {
             ps.setString(1, responsable);
             ps.setInt(2, idpaciente);
             ps.setInt(3, idmedico);
-            ps.setDate(4, new java.sql.Date(fecha.getTime()));
+            ps.setDate(4, getDate(fecha));
             ps.setDouble(5, total);
             ps.setDate(6, new java.sql.Date(getDate(updated_at).getTime()));
             ps.setInt(7, id);
@@ -195,26 +195,28 @@ public void insertar() throws SQLException {
 
     
     
-    
-    
-    
-    public Date getDate(String date) {
-        Calendar c = DateString.StringToDate(date);
-        long x = c.getTimeInMillis();
-        Date dateSQL = new Date(x);
-        return dateSQL;
-    }
-
-    public Date getDateTime(String date) {
-        Calendar c = DateString.StringToDateTime(date);
-        long x = c.getTimeInMillis();
-        Date dateSQL = new Date(x);
-        return dateSQL;
-    }
-
     public void desconectar() {
         if (conn != null) {
             conn.closeConection();
         }
     }
+    
+    public Date getDate(String date){
+    Calendar c = DateString.StringToDate(date);
+    long x = c.getTimeInMillis();
+      System.out.println(x);
+      Date dateSQL =new Date(x);
+        System.out.println(dateSQL.toString());
+    return dateSQL;
+    }
+    
+    public Date getDateTime(String date){
+    Calendar c = DateString.StringToDateTime(date);
+    long x = c.getTimeInMillis();
+      System.out.println(x);
+      Date dateSQL =new Date(x);
+        System.out.println(dateSQL.toString());
+    return dateSQL;
+    }
+    
 }

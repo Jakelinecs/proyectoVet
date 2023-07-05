@@ -2,17 +2,14 @@
 
 package Data;
 
-import Utlis.DateString;
 import coneccionsocket.ClientPsql;
-import java.sql.Date;
+
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-
 /**
  *
  * @author Marina
@@ -20,191 +17,136 @@ import java.util.List;
 public class DAtencionClinica {
  
 
-ClientPsql coneccion;
-DUsers us;//campo de usuario, reconocedor de correo
-int id,idcliente,idpaciente;
+    ClientPsql conn;
+    DUsers us;//campo de usuario, reconocedor de correo
+    String correo;
+    
+    int id;
+    int iddetalle_servicio;
+    String motivo;
+    String hr;
 
-String  fecha,hora,motivo;
-String correo;
-public static final String[]headers=
-{
-  "id","idcliente","idpaciente","fecha","hora","motivo", 
-};
+    public static final String[] headers = {"id", "iddetalleServicio", "motivo", "hr"};
 
     public DAtencionClinica() {
-        coneccion= new ClientPsql();
+        conn = new ClientPsql();
+        us = new DUsers();
     }
 
-  
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setIdcliente(int idcliente) {
-        this.idcliente = idcliente;
+    public void setIddetalleServicio(int iddetalleServicio) {
+        this.iddetalle_servicio = iddetalleServicio;
     }
-
-    public void setIdpaciente(int idpaciente) {
-        this.idpaciente = idpaciente;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
-
-
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
-    
 
-public void insertar() throws SQLException, ParseException{
+    public void setHr(String hr) {
+        this.hr = hr;
+    }
 
-    int dato;
-    dato= us.getIdByEmail(correo);//compara si existe
-    if (dato!=-1){
-        String sql="insert into atencionClinica(id,idcliente,idpaciente,fecha,hora,motivo)" + " Values(?,?,?,?,?,?)";
-    PreparedStatement pr= new ClientPsql().conectar().prepareStatement(sql);
-    pr.setInt(1, id);
-    pr.setInt(2, idcliente);
-    pr.setInt(3, idpaciente);
-    pr.setDate(4,getDate(fecha));
-    pr.setString(5, hora);
-    pr.setString(8, motivo);
+    public void insertar() throws SQLException {
+        int usId;
+        usId = us.getIdByEmail(correo);
+        if (usId!= -1) {
+            String sql = "INSERT INTO atencion_clinica(id, iddetalle_servicio, motivo, hr)" +
+                    "VALUES(?, ?, ?, ?)";
+            PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
+            ps.setInt(1, java.sql.Types.INTEGER);
+            ps.setInt(2, iddetalle_servicio);
+            ps.setString(3, motivo);
+            ps.setString(4, hr);
 
-    if(pr.executeUpdate()==0){
-        System.out.println("Ocurrio un error");
+            if (ps.executeUpdate() == 0) {
+                System.err.println("Class DAtencionClinica.java dice: Ocurrió un error al insertar AtencionClinica insertar()");
+                throw new SQLException();
+            }
+        }
     }
-    
+
+    public void editar() throws SQLException {
+        int usId;
+        usId = us.getIdByEmail(correo);
+        if (usId!= -1) {
+            String sql = "UPDATE atencion_clinica SET iddetalle_servicio=?, motivo=?, hr=?" +
+                    "WHERE id=?";
+            PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
+            ps.setInt(1, iddetalle_servicio);
+            ps.setString(2, motivo);
+            ps.setString(3, hr);
+            ps.setInt(4, id);
+
+            if (ps.executeUpdate() == 0) {
+                System.err.println("Class DAtencionClinica.java dice: Ocurrió un error al editar atencion clinica editar()");
+                throw new SQLException();
+            }
+        }
     }
-    
-}
-public void editar() throws SQLException{
-    int dato;
-    dato = us.getIdByEmail(correo);
-    if (dato!=-1){
-        String sql=" hora=?, motivo=?"
-                + "update atencionCliente set fecha=?,"
-                + "where id=?";
-    PreparedStatement pr= new ClientPsql().conectar().prepareStatement(sql);
-    pr.setInt(1, id);
-    pr.setInt(2, idcliente);
-    pr.setInt(3, idpaciente);
-    pr.setDate(4,getDate(fecha));
-    pr.setString(5, hora);
-    pr.setString(8, motivo);
-    
-    
-    
-    if(pr.executeUpdate()==0){
-        System.out.println("Ocurrio un error");
-    }
-    
-    }
-}
-public void eliminar() throws SQLException{
-    int dato;
-    dato = us.getIdByEmail(correo);
-    if (dato!=-1){
-        String sql="delete from atencionClinica where"+ "id=?";
-    PreparedStatement pr= new ClientPsql().conectar().prepareStatement(sql);
-    pr.setInt(1, id);
- 
-  
-    
-    if(pr.executeUpdate()==0){
-        System.out.println("Ocurrio un error");
-    }
-    
-    }
-}
-       /*
-    int id,idcliente,idpaciente;
-String  fecha,hora, direccion,telefono,motivo;*/
-public List<String[]>listar() throws SQLException{
-    List<String[]>lista = new ArrayList<>();
-    int dato;
-    dato= us.getIdByEmail(correo);
-    if(dato!=-1){
-        String sql="select *from atencionClinica";
+
+    public void eliminar() throws SQLException {
+        String sql = "DELETE FROM atencion_clinica WHERE id=?";
         PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
-        ResultSet set= ps.executeQuery();
-        while(set.next()){
-        lista.add(new String[]{
-            String.valueOf(set.getInt("id")),
-            String.valueOf(set.getInt("idcliente")),
-            String.valueOf(set.getInt("idpaciente")),
-             set.getString("fecha"),
-            set.getString("hora"),
-            set.getString("motivo")
-            
-        });
-            
+        ps.setInt(1, id);
+
+        if (ps.executeUpdate() == 0) {
+            System.err.println("Class DAtencionClinica.java dice: Ocurrió un error al eliminar atencion clinica eliminar()");
+            throw new SQLException();
         }
     }
-return lista;    
-}
 
+    public List<String[]> listar() throws SQLException {
+        List<String[]> lista = new ArrayList<>();
+        String sql = "SELECT * FROM atencion_clinica";
+        PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
+        ResultSet set = ps.executeQuery();
 
-public String[] ver() throws SQLException{
-    String[] usuario=null;
-    int dato;
-    dato = us.getIdByEmail(correo);
-    if(dato!=-1){
-        String sql="select * from atencionClinica WHERE id=?";
-        PreparedStatement ps= new ClientPsql().conectar().prepareStatement(sql);
-        ps.setInt(0,id);
-        ResultSet set= ps.executeQuery();
-        if(set.next()){
-            usuario= new String[]{
-             String.valueOf(set.getInt("id")),
-            String.valueOf(set.getInt("idcliente")),
-            String.valueOf(set.getInt("idpaciente")),
-             set.getString("fecha"),
-            set.getString("hora"),
-            set.getString("motivo")
-                
-                
-                
+        while (set.next()) {
+            lista.add(new String[]{
+                    String.valueOf(set.getInt("id")),
+                    String.valueOf(set.getInt("iddetalle_servicio")),
+                    set.getString("motivo"),
+                    set.getString("hr")
+            });
+        }
+
+        return lista;
+    }
+
+    public String[] ver() throws SQLException {
+        String[] atencionClinica = null;
+        String sql = "SELECT * FROM atencion_clinica WHERE id=?";
+        PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet set = ps.executeQuery();
+
+        if (set.next()) {
+            atencionClinica = new String[]{
+                    String.valueOf(set.getInt("id")),
+                    String.valueOf(set.getInt("iddetalle_servicio")),
+                    set.getString("motivo"),
+                    set.getString("hr")
             };
-        }else{
-             System.err.println("Class DPersona.java dice: " 
-                +"Ocurrio un error al ver usuario ver()"); 
-
+        } else {
+            System.err.println("Class DAtencionClinica.java dice: Ocurrió un error al ver atencion clinica ver()");
+            throw new SQLException();
         }
-            
-        }
-    return usuario;
-    }
 
-      public Date getDate(String date){
-    Calendar c = DateString.StringToDate(date);
-    long x = c.getTimeInMillis();
-      System.out.println(x);
-      Date dateSQL =new Date(x);
-        System.out.println(dateSQL.toString());
-    return dateSQL;
-    }
-
-    public void setCorreo(String correo) {
-            this.correo = correo;
+        return atencionClinica;
     }
 
     public void desconectar() {
-             if ( coneccion != null) {
-             coneccion.closeConection();
+        if (conn != null) {
+            conn.closeConection();
         }
     }
-
- 
-
-
-    
-
 }
+
+

@@ -30,6 +30,7 @@ public class DPersona {
 
     public DPersona() {
         conn= new ClientPsql();
+        us = new DUsers();
     }
 
     
