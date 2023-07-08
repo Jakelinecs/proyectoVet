@@ -53,56 +53,165 @@ public class InterpreteMain {
             public void paciente(TokenEvent event) {
                 System.out.println("CU: Paciente");
                 System.out.println(event);
+                 if (event.getAction()==Token.add) {
+                    bi.insertar(event.getParams(), event.getSender());
+                } else if(event.getAction()==Token.modify){
+                    
+                }else if (event.getAction()==Token.delete){
+                    
+                }else {
+                    System.out.println("Accion invalida en el caso de uso ");
+                }
             }
 
             @Override
             public void contrato(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+              System.out.println("CU: Contrato");
+                System.out.println(event);
+                  if (event.getAction()==Token.add) {
+                    bi.insertar(event.getParams(), event.getSender());
+                } else if(event.getAction()==Token.modify){
+                    
+                }else if (event.getAction()==Token.delete){
+                    
+                }else {
+                    System.out.println("Accion invalida en el caso de uso ");
+                }
             }
 
             @Override
             public void categoria(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                 System.out.println("CU: Categoria");
+                System.out.println(event);
+                  if (event.getAction()==Token.add) {
+                    bi.insertar(event.getParams(), event.getSender());
+                } else if(event.getAction()==Token.modify){
+                    
+                }else if (event.getAction()==Token.delete){
+                    
+                }else {
+                    System.out.println("Accion invalida en el caso de uso ");
+                }
             }
 
             @Override
             public void producto(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                  System.out.println("CU: Producto");
+                System.out.println(event);
+                  if (event.getAction()==Token.add) {
+                    bi.insertar(event.getParams(), event.getSender());
+                } else if(event.getAction()==Token.modify){
+                    
+                }else if (event.getAction()==Token.delete){
+                    
+                }else {
+                    System.out.println("Accion invalida en el caso de uso ");
+                }
             }
 
             @Override
             public void tipoServicio(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                System.out.println("CU: tipoServicio");
+                System.out.println(event);
+                  if (event.getAction()==Token.add) {
+                    bi.insertar(event.getParams(), event.getSender());
+                } else if(event.getAction()==Token.modify){
+                    
+                }else if (event.getAction()==Token.delete){
+                    
+                }else {
+                    System.out.println("Accion invalida en el caso de uso ");
+                }
             }
 
             @Override
             public void servicio(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                  System.out.println("CU: Servicio");
+                System.out.println(event);
+                  if (event.getAction()==Token.add) {
+                    bi.insertar(event.getParams(), event.getSender());
+                } else if(event.getAction()==Token.modify){
+                    
+                }else if (event.getAction()==Token.delete){
+                    
+                }else {
+                    System.out.println("Accion invalida en el caso de uso ");
+                }
             }
 
             @Override
             public void receta(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                    System.out.println("CU: Receta");
+                System.out.println(event);
+                  if (event.getAction()==Token.add) {
+                    bi.insertar(event.getParams(), event.getSender());
+                } else if(event.getAction()==Token.modify){
+                    
+                }else if (event.getAction()==Token.delete){
+                    
+                }else {
+                    System.out.println("Accion invalida en el caso de uso ");
+                }
             }
 
             @Override
             public void pago(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                    System.out.println("CU: Pago");
+                System.out.println(event);
+                  if (event.getAction()==Token.add) {
+                    bi.insertar(event.getParams(), event.getSender());
+                } else if(event.getAction()==Token.modify){
+                    
+                }else if (event.getAction()==Token.delete){
+                    
+                }else {
+                    System.out.println("Accion invalida en el caso de uso ");
+                }
             }
 
             @Override
             public void detalleServicio(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                   System.out.println("CU: detalleServicio");
+                System.out.println(event);
+                  if (event.getAction()==Token.add) {
+                    bi.insertar(event.getParams(), event.getSender());
+                } else if(event.getAction()==Token.modify){
+                    
+                }else if (event.getAction()==Token.delete){
+                    
+                }else {
+                    System.out.println("Accion invalida en el caso de uso ");
+                }
             }
 
             @Override
             public void atencion(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                     System.out.println("CU: Atencion");
+                System.out.println(event);
+                  if (event.getAction()==Token.add) {
+                    bi.insertar(event.getParams(), event.getSender());
+                } else if(event.getAction()==Token.modify){
+                    
+                }else if (event.getAction()==Token.delete){
+                    
+                }else {
+                    System.out.println("Accion invalida en el caso de uso ");
+                }
             }
 
             @Override
             public void detalleAtencion(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                        System.out.println("CU: detalleAtencion");
+                System.out.println(event);
+                  if (event.getAction()==Token.add) {
+                    bi.insertar(event.getParams(), event.getSender());
+                } else if(event.getAction()==Token.modify){
+                    
+                }else if (event.getAction()==Token.delete){
+                    
+                }else {
+                    System.out.println("Accion invalida en el caso de uso ");
+                }
             }
 
             @Override
@@ -112,7 +221,17 @@ public class InterpreteMain {
 
             @Override
             public void detallereceta(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+           System.out.println("CU: detalleReceta");
+                System.out.println(event);
+                  if (event.getAction()==Token.add) {
+                    bi.insertar(event.getParams(), event.getSender());
+                } else if(event.getAction()==Token.modify){
+                    
+                }else if (event.getAction()==Token.delete){
+                    
+                }else {
+                    System.out.println("Accion invalida en el caso de uso ");
+                }
             }
 
             @Override
