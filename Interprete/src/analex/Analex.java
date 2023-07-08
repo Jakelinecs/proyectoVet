@@ -72,26 +72,26 @@ public class Analex {
     }
 
     private boolean isBeginParams(char c){
-        return c=='(';
+        return c=='<';//inicio de capsula de parametro <{[(
     }
 
     private boolean isEndParams(char c){
-        return c==')';
+        return c=='>';//Fin de capsula de parametro >}])
     }
 
 
     private boolean isComa(char c){
-        return c==44;
+        return c==';';// simbolo para separar parametros ,;|
     }
 
-
+   
     private boolean isDate(char c){
         return c=='-' || c=='/' || c==':';
     }
 
 
     private boolean isEmail(char c){
-        return c==49 || c=='.' || c=='_' ||c=='-';
+        return c==64 || c=='.' || c=='_' || c=='-';
     }
 
 
@@ -214,9 +214,6 @@ public class Analex {
                 case 8:
                     r=new Token(Token.error, Token.error_Character);
                     return;
-                    
-                default:
-                    throw new AssertionError();
             }
         }
         

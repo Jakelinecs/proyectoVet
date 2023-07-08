@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package analex;
 
 import analex.models.TokenCommand;
@@ -64,61 +60,58 @@ public class Interpreter implements Runnable{
         }
         
         switch (token_command.getName()) {
-            case Token.usuario:
-                listener.user(token_event);
-                 break;
-            case Token.persona:
-                listener.persona(token_event);
-                 break;
-            case Token.paciente:
-                listener.paciente(token_event);
-                 break;
-            case Token.contrato:
-                listener.contrato(token_event);
-                 break;
-            case Token.categoria:
-                listener.categoria(token_event);
-                 break;
-            case Token.producto:
-                listener.producto(token_event);
-                 break;
-            case Token.tipo_servicio:
-                listener.tipoServicio(token_event);
-                 break;
-            case Token.servicio:
-                listener.servicio(token_event);
-                 break;
-            case Token.detalle_servicio:
-                listener.detalleServicio(token_event);
-                 break;
-            case Token.atencion:
-                listener.atencion(token_event);
-                 break;
-            case Token.detalle_atencion:
-                listener.detalleAtencion(token_event);
-                 break;
-            case Token.pago:
-                listener.pago(token_event);
-                 break;
-            case Token.receta:
-                listener.receta(token_event);
-                 break;
-            case Token.detalle_receta:
-                listener.detallereceta(token_event);
-                 break;
-            case Token.ayuda:
-                listener.ayuda(token_event);
-                 break;
-            default:
-                throw new AssertionError();
+            case Token.usuario -> listener.user(token_event);
+            case Token.persona -> listener.persona(token_event);
+            case Token.paciente -> listener.paciente(token_event);
+            case Token.contrato -> listener.contrato(token_event);
+            case Token.categoria -> listener.categoria(token_event);
+            case Token.producto -> listener.producto(token_event);
+            case Token.tipo_servicio -> listener.tipoServicio(token_event);
+            case Token.servicio -> listener.servicio(token_event);
+            case Token.detalle_servicio -> listener.detalleServicio(token_event);
+            case Token.atencion -> listener.atencion(token_event);
+            case Token.detalle_atencion -> listener.detalleAtencion(token_event);
+            case Token.pago -> listener.pago(token_event);
+            case Token.receta -> listener.receta(token_event);
+            case Token.detalle_receta -> listener.detallereceta(token_event);
+            case Token.ayuda -> listener.ayuda(token_event);
         }
     }   
     
     
+    private void tokenError(Token token, String error){
+        TokenEvent token_event = new TokenEvent(this, sender);
+        token_event.setAction(token.getAtribute());
+        token_event.addParams(command);
+        token_event.addParams(error);
+        listener.error(token_event);
+        
+    }
+    
     
     @Override
     public void run() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        analex = new Analex(command);
+        TokenCommand token_command = new TokenCommand();
+        Token token;
+        
+        
+        while((token = analex.preAnalisis()).getName() != Token.end && token.getName() != Token.error){
+            if(token.getName() == Token.cu){
+                token_command.setName(token.getAtribute());// id del CU
+            } else if(token.getName() == Token.action){
+                token_command.setAction(token.getAtribute());// id de la accion
+            } else if(token.getName() == Token.params){
+                token_command.addParams(token.getAtribute());// la posicion del parametro en el tsp
+            }
+            analex.next();
+        }
+        
+        if(token.getName() == Token.end){
+            filterEvent(token_command);// se analizo el comando con exito
+        } else if(token.getName() == Token.error){
+            tokenError(token, analex.lexeme()); // se produjo un error en el analisis
+        }
+        
     }
-    
 }

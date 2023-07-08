@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package analex.utils;
 
 import java.util.ArrayList;
@@ -20,7 +16,7 @@ public class TSParams {
     public TSParams() {
         L = new ArrayList<String>();
     }
-
+    //inicio de lectura de parametros = 0
     public void init() {
         L.clear();
     }
@@ -30,7 +26,7 @@ public class TSParams {
     }
 
     public int Existe(String Str) {
-        for (int i = 0; i < length() - 1; i++) {
+        for (int i = 0; i <= (length() - 1); i++) {
             if (L.get(i).equals(Str)) {
                 return i;
             }
@@ -59,7 +55,7 @@ public class TSParams {
     }
 
     public boolean posValida(int index) {
-        return (0 <= index && index <= length() - 1);
+        return ((0 <= index) && (index <= (length() - 1)));
     }
 
     @Override
@@ -75,12 +71,12 @@ public class TSParams {
         int n = longitudFila();
 
         String bordeSup = paddLeft + ' ' + Utils.runLength('_', n);
-        String Titulo = paddLeft + '|' + Utils.fieldCenter(TITLE, n);
-        String bordeInd = paddLeft + '+' + Utils.runLength('_', n);
+        String Titulo = paddLeft + '|' + Utils.fieldCenter(TITLE, n)+'|';
+        String bordeInd = paddLeft + '+' + Utils.runLength('-', n)+ '+';
 
         result = bordeSup + lf + Titulo + lf + bordeInd + lf;
         int fieldPos = paddLeft.length();
-        for (int i = 0; i < length() - 1; i++) {
+        for (int i = 0; i < (length() - 1); i++) {
             String posicion = Utils.fieldRight("" + i, fieldPos);
             String fila = '|'+ Utils.fieldLeft('"'+L.get(i)+'"', n) + '|';
             result += posicion + fila + lf;
@@ -90,7 +86,7 @@ public class TSParams {
 
     private int longitudFila() {
         int may = TITLE.length();
-        for (int i = 0; i < length() - 1; i++) {
+        for (int i = 0; i < (length() - 1); i++) {
             int lonStr = L.get(i).length();
             if (lonStr > may) {
                 may = lonStr;

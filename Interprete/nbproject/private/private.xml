@@ -4,7 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/Interprete/src/interprete/InterpreteMain.java</file>
-            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/Interprete/src/analex/utils/Utils.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/Interprete/src/analex/Analex.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/Interprete/src/analex/interfaces/ItokenEvenListener.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/Interprete/src/analex/models/TokenCommand.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/Interprete/src/analex/Interpreter.java</file>
         </group>
     </open-files>
 </project-private>

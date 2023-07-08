@@ -18,7 +18,7 @@ public class TokenEvent extends EventObject {
     private int action;//accion de caso de uso
     private List<String> params;//lista de parametros
 
-    private String sender;
+    private String sender;//correo 
 
     public TokenEvent(Object source) {
         super(source);

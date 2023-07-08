@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package analex.utils;
 
 /**
@@ -47,6 +43,8 @@ public class Token {
     public static final int verify = 204;
     public static final int cancel = 205;
     public static final int report = 206;
+    public static final int list = 207;
+    public static final int ver = 208;
 
     //identificadores de errores
     public static final int error_Command = 300;
@@ -63,7 +61,10 @@ public class Token {
     
     
     
-    
+        /**
+     *
+     */
+
     public static final String lexeme_User = "user";
     public static final String lexeme_Persona = "persona";
     public static final String lexeme_Paciente = "paciente";
@@ -92,7 +93,8 @@ public class Token {
     public static final String lexeme_Verify = "verify";
     public static final String lexeme_Cancel = "cancel";
     public static final String lexeme_Report = "report";
-    public static final String lexeme_Agregar = "agregar";
+    public static final String lexeme_list = "list";
+    public static final String lexeme_ver = "ver";
 
     public static final String lexeme_Error_Command = "UNKNOWN COMMAND";
     public static final String lexeme_Error_Character = "UNKNOWN CHARACTER";
@@ -145,94 +147,52 @@ public class Token {
 
     public String toString() {
         if (0 <= name && name <= 1) {
-            return "( " + getStringToken(name) + "," + getStringToken(atribute) + ")";
+            return "< " + getStringToken(name) + "," + getStringToken(atribute) + ">";
         } else if (name == 2) {
-            return "( " + getStringToken(name) + "," + atribute + ")";
+            return "< " + getStringToken(name) + "," + atribute + ">";
         } else if (name == 3) {
-            return "( " + getStringToken(name) + "," + "____________)";
+            return "< " + getStringToken(name) + "," + "____________>";
         } else if (name == 4) {
-            return "( " + getStringToken(name) + "," + getStringToken(atribute) + ")";
+            return "< " + getStringToken(name) + "," + getStringToken(atribute) + ">";
         }
         return "(TOKEN, DESCONOCIDO)";
     }
     
 
     public String getStringToken(int token){
-        switch (token) {
-            case cu:
-                return lexeme_CU;
-            case action:
-                return lexeme_Action;
-            case params:
-                return lexeme_Params;
-            case end:
-                return lexeme_End;
-            case error:
-                return lexeme_Error;
-
-
-                    ///CU
-            case usuario:
-                return lexeme_User;
-            case persona:
-                return lexeme_Persona;
-            case paciente:
-                return lexeme_Paciente;
-            case contrato:
-                return lexeme_contrato;
-            case categoria:
-                return lexeme_categoria;
-            case producto:
-                return lexeme_producto;
-            case tipo_servicio:
-                return lexeme_tipo_servicio;
-            case servicio:
-                return lexeme_servicio;
-            case detalle_servicio:
-                return lexeme_detalle_servicio;
-            case atencion:
-                return lexeme_atencion;
-            case detalle_atencion:
-                return lexeme_detalle_atencion;
-            case pago:
-                return lexeme_pago;
-            case receta:
-                return lexeme_receta;
-            case detalle_receta:
-                return lexeme_detalle_receta;
-            case ayuda:
-                return lexeme_ayuda;
-
-
-
-
-
-            case add:
-                return lexeme_Add;
-            case delete:
-                return lexeme_Delete;
-            case modify:
-                return lexeme_Modify;
-            case get:
-                return lexeme_Get;
-            case verify:
-                return lexeme_Verify;
-            case cancel:
-                return lexeme_Cancel;
-            case report:
-                return lexeme_Report;
-
-                
-                
-
-            case error_Command:
-                return lexeme_Error_Command;
-            case error_Character:
-                return lexeme_Error_Character;
-
-            default:
-                return "N: "+token;
-        }
+        return switch (token) {
+            case cu -> lexeme_CU;
+            case action -> lexeme_Action;
+            case params -> lexeme_Params;
+            case end -> lexeme_End;
+            case error -> lexeme_Error;
+            case usuario -> lexeme_User;
+            case persona -> lexeme_Persona;
+            case paciente -> lexeme_Paciente;
+            case contrato -> lexeme_contrato;
+            case categoria -> lexeme_categoria;
+            case producto -> lexeme_producto;
+            case tipo_servicio -> lexeme_tipo_servicio;
+            case servicio -> lexeme_servicio;
+            case detalle_servicio -> lexeme_detalle_servicio;
+            case atencion -> lexeme_atencion;
+            case detalle_atencion -> lexeme_detalle_atencion;
+            case pago -> lexeme_pago;
+            case receta -> lexeme_receta;
+            case detalle_receta -> lexeme_detalle_receta;
+            case ayuda -> lexeme_ayuda;
+            case add -> lexeme_Add;
+            case delete -> lexeme_Delete;
+            case modify -> lexeme_Modify;
+            case get -> lexeme_Get;
+            case verify -> lexeme_Verify;
+            case cancel -> lexeme_Cancel;
+            case report -> lexeme_Report;
+            case list -> lexeme_list;
+            case error_Command -> lexeme_Error_Command;
+            case error_Character -> lexeme_Error_Character;
+            default -> "N: "+token;
+        }; ///CU
     }
     
     
@@ -281,6 +241,8 @@ public class Token {
                 return detalle_receta;
             case lexeme_ayuda:
                 return ayuda;
+            case lexeme_list:
+                return list;
 
 
 

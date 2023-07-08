@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package analex.utils;
 
 import java.awt.Color;
@@ -11,9 +7,6 @@ import java.awt.Color;
  * @author HP
  */
 public class Utils {
-
-    public Utils() {
-    }
 
     public static String fieldLeft(String s, int ancho) {
         return s + espacios(ancho - s.length());
@@ -31,7 +24,7 @@ public class Utils {
         int padding = (ancho - s.length()) / 2;
         s = espacios(padding) + s;
 
-        return espacios(ancho - s.length());
+        return s + espacios(ancho - s.length());
     }
 
     private static String espacios(int n) {

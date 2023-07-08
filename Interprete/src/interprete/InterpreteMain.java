@@ -22,11 +22,12 @@ public class InterpreteMain {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        String comando="PACIENTE_ADD<Firulay,canina,salchicha,macho,megro,12-05-2020,1,null>";
-        String correo="jakeli1997.jcs@gmail.com";
-        INegocio bi= new NPersona();
-        Interpreter interprete = new Interpreter(comando,correo);
-        
+        //String comando = "paciente_add(Firulay,canina,salchicha,macho,megro,12-05-2020,1,null)";
+        String comando = "persona_ver<1>";
+        String correo = "jakeli1997.jcs@gmail.com";
+        NPersona bi = new NPersona();
+        Interpreter interprete = new Interpreter(comando, correo);
+
         interprete.setListener(new ItokenEvenListener() {
             @Override
             public void user(TokenEvent event) {
@@ -38,14 +39,16 @@ public class InterpreteMain {
             public void persona(TokenEvent event) {
                 System.out.println("CU: Persona");
                 System.out.println(event);
-                if (event.getAction()==Token.add) {
-                    bi.insertar(event.getParams(), event.getSender());
-                } else if(event.getAction()==Token.modify){
-                    
-                }else if (event.getAction()==Token.delete){
-                    
-                }else {
-                    System.out.println("Accion invalida en el caso de uso ");
+                switch (event.getAction()) {
+                    case Token.add -> bi.insertar(event.getParams(), event.getSender());
+                    case Token.modify -> bi.editar(event.getParams(), event.getSender());
+                    case Token.delete -> bi.eliminar(event.getParams(), event.getSender());
+                    case Token.list -> bi.listar(event.getSender());
+                    case Token.ver -> {
+                        bi.ver(event.getParams(), event.getSender());
+                        System.out.println(bi);
+                    }
+                    default -> System.out.println("Accion invalida en el caso de uso ");
                 }
             }
 
@@ -53,199 +56,92 @@ public class InterpreteMain {
             public void paciente(TokenEvent event) {
                 System.out.println("CU: Paciente");
                 System.out.println(event);
-                 if (event.getAction()==Token.add) {
-                    bi.insertar(event.getParams(), event.getSender());
-                } else if(event.getAction()==Token.modify){
-                    
-                }else if (event.getAction()==Token.delete){
-                    
-                }else {
-                    System.out.println("Accion invalida en el caso de uso ");
-                }
             }
 
             @Override
             public void contrato(TokenEvent event) {
-              System.out.println("CU: Contrato");
+                System.out.println("CU: Paciente");
                 System.out.println(event);
-                  if (event.getAction()==Token.add) {
-                    bi.insertar(event.getParams(), event.getSender());
-                } else if(event.getAction()==Token.modify){
-                    
-                }else if (event.getAction()==Token.delete){
-                    
-                }else {
-                    System.out.println("Accion invalida en el caso de uso ");
-                }
             }
 
             @Override
             public void categoria(TokenEvent event) {
-                 System.out.println("CU: Categoria");
+                System.out.println("CU: contrato");
                 System.out.println(event);
-                  if (event.getAction()==Token.add) {
-                    bi.insertar(event.getParams(), event.getSender());
-                } else if(event.getAction()==Token.modify){
-                    
-                }else if (event.getAction()==Token.delete){
-                    
-                }else {
-                    System.out.println("Accion invalida en el caso de uso ");
-                }
             }
 
             @Override
             public void producto(TokenEvent event) {
-                  System.out.println("CU: Producto");
+                System.out.println("CU: producto");
                 System.out.println(event);
-                  if (event.getAction()==Token.add) {
-                    bi.insertar(event.getParams(), event.getSender());
-                } else if(event.getAction()==Token.modify){
-                    
-                }else if (event.getAction()==Token.delete){
-                    
-                }else {
-                    System.out.println("Accion invalida en el caso de uso ");
-                }
             }
 
             @Override
             public void tipoServicio(TokenEvent event) {
                 System.out.println("CU: tipoServicio");
                 System.out.println(event);
-                  if (event.getAction()==Token.add) {
-                    bi.insertar(event.getParams(), event.getSender());
-                } else if(event.getAction()==Token.modify){
-                    
-                }else if (event.getAction()==Token.delete){
-                    
-                }else {
-                    System.out.println("Accion invalida en el caso de uso ");
-                }
             }
 
             @Override
             public void servicio(TokenEvent event) {
-                  System.out.println("CU: Servicio");
+                System.out.println("CU: servicio");
                 System.out.println(event);
-                  if (event.getAction()==Token.add) {
-                    bi.insertar(event.getParams(), event.getSender());
-                } else if(event.getAction()==Token.modify){
-                    
-                }else if (event.getAction()==Token.delete){
-                    
-                }else {
-                    System.out.println("Accion invalida en el caso de uso ");
-                }
             }
 
             @Override
             public void receta(TokenEvent event) {
-                    System.out.println("CU: Receta");
+                System.out.println("CU: receta");
                 System.out.println(event);
-                  if (event.getAction()==Token.add) {
-                    bi.insertar(event.getParams(), event.getSender());
-                } else if(event.getAction()==Token.modify){
-                    
-                }else if (event.getAction()==Token.delete){
-                    
-                }else {
-                    System.out.println("Accion invalida en el caso de uso ");
-                }
             }
 
             @Override
             public void pago(TokenEvent event) {
-                    System.out.println("CU: Pago");
+                System.out.println("CU: pago");
                 System.out.println(event);
-                  if (event.getAction()==Token.add) {
-                    bi.insertar(event.getParams(), event.getSender());
-                } else if(event.getAction()==Token.modify){
-                    
-                }else if (event.getAction()==Token.delete){
-                    
-                }else {
-                    System.out.println("Accion invalida en el caso de uso ");
-                }
             }
 
             @Override
             public void detalleServicio(TokenEvent event) {
-                   System.out.println("CU: detalleServicio");
+                System.out.println("CU: detalleServicio");
                 System.out.println(event);
-                  if (event.getAction()==Token.add) {
-                    bi.insertar(event.getParams(), event.getSender());
-                } else if(event.getAction()==Token.modify){
-                    
-                }else if (event.getAction()==Token.delete){
-                    
-                }else {
-                    System.out.println("Accion invalida en el caso de uso ");
-                }
             }
 
             @Override
             public void atencion(TokenEvent event) {
-                     System.out.println("CU: Atencion");
+                System.out.println("CU: atencion");
                 System.out.println(event);
-                  if (event.getAction()==Token.add) {
-                    bi.insertar(event.getParams(), event.getSender());
-                } else if(event.getAction()==Token.modify){
-                    
-                }else if (event.getAction()==Token.delete){
-                    
-                }else {
-                    System.out.println("Accion invalida en el caso de uso ");
-                }
             }
 
             @Override
             public void detalleAtencion(TokenEvent event) {
-                        System.out.println("CU: detalleAtencion");
+                System.out.println("CU: detalleAtencion");
                 System.out.println(event);
-                  if (event.getAction()==Token.add) {
-                    bi.insertar(event.getParams(), event.getSender());
-                } else if(event.getAction()==Token.modify){
-                    
-                }else if (event.getAction()==Token.delete){
-                    
-                }else {
-                    System.out.println("Accion invalida en el caso de uso ");
-                }
             }
 
             @Override
             public void error(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                System.out.println("CU: error");
+                System.out.println(event);
             }
 
             @Override
             public void detallereceta(TokenEvent event) {
-           System.out.println("CU: detalleReceta");
+                System.out.println("CU: detallereceta");
                 System.out.println(event);
-                  if (event.getAction()==Token.add) {
-                    bi.insertar(event.getParams(), event.getSender());
-                } else if(event.getAction()==Token.modify){
-                    
-                }else if (event.getAction()==Token.delete){
-                    
-                }else {
-                    System.out.println("Accion invalida en el caso de uso ");
-                }
             }
 
             @Override
             public void ayuda(TokenEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                System.out.println("CU: ayuda");
+                System.out.println(event);
             }
 
         });
-    
-        
+
         Thread thread = new Thread(interprete);
         thread.setName("Interprete Thread");
         thread.start();
 
     }
-    
+
 }
