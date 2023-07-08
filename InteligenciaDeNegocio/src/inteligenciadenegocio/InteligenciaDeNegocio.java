@@ -68,15 +68,17 @@ public class InteligenciaDeNegocio {
         */
 //        NProducto negocio = new NProducto();
      //   NUsers negocio = new NUsers();
-        INegocio negocio = new NDetalleReceta();
+        INegocio negocio = new NPersona();
      
         List<String> data= new ArrayList<>();
         
         data.add("2");
-        data.add("diclofenaco en gotas");
-        data.add("15 gotas cada 8 hrs por 7 dias");
-        negocio.insertar(data,email);
-     
+        //data.add("diclofenaco en gotas");
+        //data.add("15 gotas cada 8 hrs por 7 dias");
+        String[] x = negocio.ver(data,email);
+        System.out.println("---------------");
+        System.out.println(Arrays.toString(x));
+        System.out.println("---------------");
      
 
         List<String[]> lista = negocio.listar(email);

@@ -112,8 +112,9 @@ public class Token {
         } else {
             this.name = error;
             this.atribute = error_Command;
-            System.err.println("Class Token.constructor dice : }n"
-                    + "El lexema enviado al contruir no es reconocido como un token");
+            System.err.println("Class Token.constructor dice: \n"
+                    + "El lexema enviado al contruir no es reconocido como un token"
+                    + "Lexema: " + token);
         }
     }
 
@@ -189,6 +190,7 @@ public class Token {
             case cancel -> lexeme_Cancel;
             case report -> lexeme_Report;
             case list -> lexeme_list;
+            case ver -> lexeme_ver;
             case error_Command -> lexeme_Error_Command;
             case error_Character -> lexeme_Error_Character;
             default -> "N: "+token;
@@ -263,6 +265,8 @@ public class Token {
                 return  cancel;
             case lexeme_Report:
                 return  report;
+            case lexeme_ver:
+                return  ver;
 
 
 

@@ -10,6 +10,7 @@ import analex.Interpreter;
 import analex.interfaces.ItokenEvenListener;
 import analex.utils.Token;
 import events.TokenEvent;
+import java.util.Arrays;
 
 /**
  *
@@ -23,7 +24,7 @@ public class InterpreteMain {
     public static void main(String[] args) {
         // TODO code application logic here
         //String comando = "paciente_add(Firulay,canina,salchicha,macho,megro,12-05-2020,1,null)";
-        String comando = "persona_ver<1>";
+        String comando = "persona ver <1>";
         String correo = "jakeli1997.jcs@gmail.com";
         NPersona bi = new NPersona();
         Interpreter interprete = new Interpreter(comando, correo);
@@ -45,8 +46,9 @@ public class InterpreteMain {
                     case Token.delete -> bi.eliminar(event.getParams(), event.getSender());
                     case Token.list -> bi.listar(event.getSender());
                     case Token.ver -> {
-                        bi.ver(event.getParams(), event.getSender());
-                        System.out.println(bi);
+                        String[] x = bi.ver(event.getParams(), event.getSender());
+                        System.out.println("okey");
+                        System.out.println(Arrays.toString(x));
                     }
                     default -> System.out.println("Accion invalida en el caso de uso ");
                 }

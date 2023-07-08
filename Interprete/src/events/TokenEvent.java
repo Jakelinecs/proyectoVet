@@ -90,9 +90,9 @@ public class TokenEvent extends EventObject {
     public String toString() {
         Token token = new Token();
         String s = "";
-        s = s + "Remitente" + sender + "\n";
-        s = s + "Action" + token.getStringToken(action) + "\n";
-        s = s + "Params" + "\n";
+        s = s + "Remitente: " + sender + "\n";
+        s = s + "Action: " + token.getStringToken(action) + "\n";
+        s = s + "Params: " + "\n";
 
         for (String param : params) {
             s = s +  "  "+ param+"\n";
