@@ -73,6 +73,42 @@ public class Interpreter implements Runnable{
             case Token.paciente:
                 listener.paciente(token_event);
                  break;
+            case Token.contrato:
+                listener.contrato(token_event);
+                 break;
+            case Token.categoria:
+                listener.categoria(token_event);
+                 break;
+            case Token.producto:
+                listener.producto(token_event);
+                 break;
+            case Token.tipo_servicio:
+                listener.tipoServicio(token_event);
+                 break;
+            case Token.servicio:
+                listener.servicio(token_event);
+                 break;
+            case Token.detalle_servicio:
+                listener.detalleServicio(token_event);
+                 break;
+            case Token.atencion:
+                listener.atencion(token_event);
+                 break;
+            case Token.detalle_atencion:
+                listener.detalleAtencion(token_event);
+                 break;
+            case Token.pago:
+                listener.pago(token_event);
+                 break;
+            case Token.receta:
+                listener.receta(token_event);
+                 break;
+            case Token.detalle_receta:
+                listener.detallereceta(token_event);
+                 break;
+            case Token.ayuda:
+                listener.ayuda(token_event);
+                 break;
             default:
                 throw new AssertionError();
         }

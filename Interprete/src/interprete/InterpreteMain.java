@@ -4,8 +4,11 @@
  */
 package interprete;
 
+import Negocio.INegocio;
+import Negocio.NPersona;
 import analex.Interpreter;
 import analex.interfaces.ItokenEvenListener;
+import analex.utils.Token;
 import events.TokenEvent;
 
 /**
@@ -21,6 +24,7 @@ public class InterpreteMain {
         // TODO code application logic here
         String comando="PACIENTE_ADD<Firulay,canina,salchicha,macho,megro,12-05-2020,1,null>";
         String correo="jakeli1997.jcs@gmail.com";
+        INegocio bi= new NPersona();
         Interpreter interprete = new Interpreter(comando,correo);
         
         interprete.setListener(new ItokenEvenListener() {
@@ -34,6 +38,15 @@ public class InterpreteMain {
             public void persona(TokenEvent event) {
                 System.out.println("CU: Persona");
                 System.out.println(event);
+                if (event.getAction()==Token.add) {
+                    bi.insertar(event.getParams(), event.getSender());
+                } else if(event.getAction()==Token.modify){
+                    
+                }else if (event.getAction()==Token.delete){
+                    
+                }else {
+                    System.out.println("Accion invalida en el caso de uso ");
+                }
             }
 
             @Override
@@ -43,10 +56,70 @@ public class InterpreteMain {
             }
 
             @Override
-            public void error(TokenEvent event) {
-                System.out.println("Desconocido");
-                System.out.println(event);
+            public void contrato(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
+
+            @Override
+            public void categoria(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void producto(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void tipoServicio(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void servicio(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void receta(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void pago(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void detalleServicio(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void atencion(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void detalleAtencion(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void error(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void detallereceta(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void ayuda(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
         });
     
         

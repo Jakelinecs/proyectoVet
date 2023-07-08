@@ -41,10 +41,10 @@ public class SendEmailThread implements Runnable{
     
  private final static String port_SMTP="465";
     private final static String protocol="smtp";
-    private final static String host="smtp.googlemail.com";
-    private final static String user="jakeli1997jcs@gmail.com";
-    private final static String mail="jakeli1997jcs@gmail.com";
-    private final static String mail_Password="kaly2022";
+    private final static String host="mail.tecnoweb.org.bo";
+    private final static String user="grupo09sa";
+    private final static String mail="grupo09sa@tecnoweb.org.bo";
+    private final static String mail_Password="grup009grup009";
     
     public SendEmailThread(Email email){
         this.email= email;
@@ -62,8 +62,8 @@ public class SendEmailThread implements Runnable{
        
         properties.setProperty("mail.smtp.host", host);
         properties.setProperty("mail.smtp.port", port_SMTP);
-        //properties.setProperty("mail.smtp.tls.enable", "true");//usando tecnoWeb
-        properties.setProperty("mail.smtp.ssl.enable", "true");//usando Gmail
+        properties.setProperty("mail.smtp.tls.enable", "true");//usando tecnoWeb
+        //properties.setProperty("mail.smtp.ssl.enable", "true");//usando Gmail
         properties.setProperty("mail.smtp.auth", "true");
      Session session;
         session = Session.getDefaultInstance(properties,new javax.mail.Authenticator(){

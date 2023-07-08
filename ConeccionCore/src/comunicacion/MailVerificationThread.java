@@ -78,6 +78,7 @@ public class MailVerificationThread implements Runnable {
         for (int i = 1; i <= count; i++) {
             output.writeBytes(Command.retr(i));
             String text = readMultiline();
+            
             emails.add(Extractor.getEmail(text));
         }
 

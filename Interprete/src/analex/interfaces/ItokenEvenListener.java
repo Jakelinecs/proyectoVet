@@ -17,19 +17,17 @@ public interface ItokenEvenListener {
     void user(TokenEvent event);
     void persona(TokenEvent event);
     void paciente(TokenEvent event);
-    /*void client(TokenEvent event);
-    void dpto(TokenEvent event);
-    void social(TokenEvent event);
-    void schedule(TokenEvent event);
-    void notify(TokenEvent event);
-    void apartament(TokenEvent event);
-    void visit(TokenEvent event);
-    void support(TokenEvent event);
-    void reserva(TokenEvent event);
-    void veterinario(TokenEvent event);
-    void reserve(TokenEvent event);
-    void veterinario(TokenEvent event);
-    void mascota(TokenEvent event);
-    */
+    void contrato(TokenEvent event);
+    void categoria(TokenEvent event);
+    void producto(TokenEvent event);
+    void tipoServicio(TokenEvent event);
+    void servicio(TokenEvent event);
+    void detalleServicio(TokenEvent event);
+    void atencion(TokenEvent event);
+    void detalleAtencion(TokenEvent event);
+    void pago(TokenEvent event);
+    void receta(TokenEvent event);
+    void detallereceta(TokenEvent event);
     void error(TokenEvent event);
+    void ayuda(TokenEvent event);
 }

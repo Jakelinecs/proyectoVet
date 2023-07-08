@@ -6,13 +6,20 @@ public class Extractor {
     private static String YAHOO = "d=yahoo";
     private static String OUTLOOK = "d=microsoft.com";
     private static String FICCT_UAGRM = "d=ficct.uagrm.edu.bo";
+    private static String TECNO_WEB = "www.tecnoweb.org.bo";
 
     public static Email getEmail(String plain_text) {
 //        System.out.println("-----------------------------------------------");
 //        System.out.println(plain_text);
 //        System.out.println("-----------------------------------------------");
         // String from, String to, String subject, String message
-        return new Email(getFrom(plain_text), getTo(plain_text), getSubject(plain_text), null);
+        String from = getFrom(plain_text);
+        String to = getTo(plain_text);
+        String subject = getSubject(plain_text);
+        String mesaje = getMensaje(plain_text);
+        
+        
+        return new Email(from, to, subject, mesaje);
     }
 
     private static String getFrom(String plain_text) {
@@ -35,11 +42,19 @@ public class Extractor {
                 end_string = "MIME-Version:";
             } else if (plain_text.contains(FICCT_UAGRM)) {
                 end_string = "From: ";
+            } else if (plain_text.contains(TECNO_WEB)) {
+                end_string = "User-Agent: ";
             }
             int e = plain_text.indexOf(end_string, i);
             return plain_text.substring(i, e).replace("\n", "");
         } catch (Exception exception) {
             if (plain_text.contains(FICCT_UAGRM)) {
+                i = plain_text.indexOf(search) + search.length();
+                end_string = "Message-ID: ";
+                int e = plain_text.indexOf(end_string, i);
+                return plain_text.substring(i, e).replace("\n", "");
+            }
+            if (plain_text.contains(TECNO_WEB)) {
                 i = plain_text.indexOf(search) + search.length();
                 end_string = "Message-ID: ";
                 int e = plain_text.indexOf(end_string, i);
@@ -52,7 +67,7 @@ public class Extractor {
 
     private static String getTo(String plain_text) {
         String to = "";
-        if (plain_text.contains(GMAIL) || plain_text.contains(FICCT_UAGRM)) {
+        if (plain_text.contains(GMAIL) || plain_text.contains(FICCT_UAGRM)|| plain_text.contains(TECNO_WEB)) {
             to = getToFromGmail(plain_text);
         } else if (plain_text.contains(HOTMAIL)) {
             to = getToFromHotmail(plain_text);
@@ -84,4 +99,44 @@ public class Extractor {
         int index_end = plain_text.indexOf("\n", index_begin);
         return plain_text.substring(index_begin, index_end);
     }
+    
+        private static String getMensaje(String plain_text) {
+        String search = "Subject: ";
+        int i = plain_text.indexOf(search) + search.length();
+        String end_string = "";
+        try {
+            if (plain_text.contains(GMAIL)) {
+                search = "charset=\"UTF-8\"";
+                end_string = "--00000000";
+            } else if (plain_text.contains(HOTMAIL) || plain_text.contains(OUTLOOK)) {
+                search = "Content-Transfer-Encoding: quoted-printable";
+                end_string = "--_";
+            } else if (plain_text.contains(YAHOO)) {
+                end_string = "MIME-Version:";
+            } else if (plain_text.contains(FICCT_UAGRM)) {
+                end_string = "From: ";
+            } else if (plain_text.contains(TECNO_WEB)) {
+                search = "Content-Transfer-Encoding:";
+                end_string = plain_text;
+            }
+            i = plain_text.indexOf(search) + search.length();
+            int e = plain_text.indexOf(end_string, i);
+            return plain_text.substring(i, e);
+        } catch (Exception exception) {
+            if (plain_text.contains(FICCT_UAGRM)) {
+                i = plain_text.indexOf(search) + search.length();
+                end_string = "Message-ID: ";
+                int e = plain_text.indexOf(end_string, i);
+                return plain_text.substring(i, e).replace("\n", "");
+            }
+            if (plain_text.contains(TECNO_WEB)) {
+                i = plain_text.indexOf(search) + search.length();
+                int e = plain_text.length();
+                return plain_text.substring(i, e).replace("\n", "");
+            }
+            System.out.println("Error in getSubject: " + exception);
+            return "NO SUBJECT";
+        }
+    }
+
 }
