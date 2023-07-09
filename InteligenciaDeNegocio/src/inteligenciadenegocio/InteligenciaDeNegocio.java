@@ -16,8 +16,8 @@ public class InteligenciaDeNegocio {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        String email="jakeli1997.jcs@gmail.com";
+
+        String email = "jakeli1997.jcs@gmail.com";
         /*
         NPersona negocio = new NPersona();
         
@@ -30,8 +30,8 @@ public class InteligenciaDeNegocio {
         persona.add("75069277");
         persona.add("B/ la fortaleza");
         negocio.insertar(persona,email);
-        */
-    /*    
+         */
+ /*    
         NPaciente negocioP = new NPaciente();
         
         List<String> paciente= new ArrayList<>();
@@ -45,21 +45,20 @@ public class InteligenciaDeNegocio {
         paciente.add("2018-09-14");
         paciente.add("1");
         negocioP.insertar(paciente,email);
-        */
+         */
 //        NProducto negocio = new NProducto();
-     //   NUsers negocio = new NUsers();
+        //   NUsers negocio = new NUsers();
         INegocio negocio = new NBitacora();
-     
-     
 
+        List<String> data = new ArrayList<>();
         List<String[]> lista = negocio.listar(email);
         for (String[] dato : lista) {
             System.out.println(Arrays.toString(dato));
         }
-    
-    
-    
-        
+        System.out.println("---------------------");
+        String[] l = negocio.ver(data, email);
+        System.out.println(Arrays.toString(l));
+
     }
-    
+
 }

@@ -37,8 +37,8 @@ public class ConeccionNucleo {
             */
         
         ///prueba de  envio de correo
-        //Email emailObjet = new Email("jakeli1997.jcs@gmail.com", "hola", "Peticion Prueva realizada correctamente");
-        Email emailObjet = new Email("grupo05sa@tecnoweb.org.bo", Email.SUBJECT, "Peticion Prueva realizada correctamente");
+        Email emailObjet = new Email("jakeli1997.jcs@gmail.com", "hola", "Peticion Prueva realizada correctamente");
+        //Email emailObjet = new Email("grupo05sa@tecnoweb.org.bo", Email.SUBJECT, "Peticion Prueva realizada correctamente");
 
         //SendEmailThread sendEmail= new SendEmailThread(emailObjet);
         EnvioSMS sendEmail= new EnvioSMS(emailObjet);

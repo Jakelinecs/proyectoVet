@@ -36,7 +36,7 @@ public abstract class SistemaMail implements IEmailEventListener {
     private INegocio bitacora = new NBitacora();
 
     String comando;
-
+    String[] dato;
     public SistemaMail() {
         mailVerificationThread = new MailVerificationThread();
         mailVerificationThread.setEmailEventListener(SistemaMail.this);
@@ -96,6 +96,8 @@ public abstract class SistemaMail implements IEmailEventListener {
                     List<String> a = new ArrayList<>();
                     a.add(comando);
                     bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override

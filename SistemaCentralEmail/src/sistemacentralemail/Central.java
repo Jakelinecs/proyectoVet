@@ -31,6 +31,8 @@ public class Central extends javax.swing.JFrame{
      * Creates new form Central
      */
     NBitacora negocio;
+    
+    int i=0;
     public Central() {
         initComponents();
         negocio = new NBitacora();
@@ -40,20 +42,24 @@ public class Central extends javax.swing.JFrame{
         app = new SistemaMail() {
             @Override
             public void miMetodoAbstracto(String[] dato) {
-                jTextAreaBitacora.append(Arrays.toString(dato) + '\n');
+                adicionar(dato);
             }
         };
         app.start();
         
         
     }
-
+    public void adicionar(String[] dato){
+        jTextAreaBitacora.append(Arrays.toString(dato) + '\n');
+    }
+    
     public void listar() {
 
         List<String[]> lista = negocio.listar("grup09@tecnoweb.org");
         for (String[] dato : lista) {
             jTextAreaBitacora.append(Arrays.toString(dato) + '\n');
             System.out.println(Arrays.toString(dato));
+            i++;
 
         }
     }

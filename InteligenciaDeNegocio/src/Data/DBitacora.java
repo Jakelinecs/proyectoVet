@@ -155,9 +155,8 @@ public class DBitacora {
         int usId;
         usId = us.getIdByEmail(correo);
         if (usId!= -1) {
-            String sql="SELECT * FROM (SELECT * FROM bitacora_email  ORDER BY fecha_hr DESC) WHERE ROWNUM = 1;";
+            String sql="SELECT * FROM bitacora_email ORDER BY fecha_hr DESC LIMIT 1;";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
-            ps.setInt(1, id);
             ResultSet set= ps.executeQuery();
 
             if(set.next()){
