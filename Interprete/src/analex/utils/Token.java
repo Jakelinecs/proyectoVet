@@ -160,51 +160,108 @@ public class Token {
     }
     
 
-    public String getStringToken(int token){
-        return switch (token) {
-            case cu -> lexeme_CU;
-            case action -> lexeme_Action;
-            case params -> lexeme_Params;
-            case end -> lexeme_End;
-            case error -> lexeme_Error;
-
-
-
-            case usuario -> lexeme_User;
-            case persona -> lexeme_Persona;
-            case paciente -> lexeme_Paciente;
-            case contrato -> lexeme_contrato;
-            case categoria -> lexeme_categoria;
-            case producto -> lexeme_producto;
-            case tipo_servicio -> lexeme_tipo_servicio;
-            case servicio -> lexeme_servicio;
-            case detalle_servicio -> lexeme_detalle_servicio;
-            case atencion -> lexeme_atencion;
-            case detalle_atencion -> lexeme_detalle_atencion;
-            case pago -> lexeme_pago;
-            case receta -> lexeme_receta;
-            case detalle_receta -> lexeme_detalle_receta;
-            case ayuda -> lexeme_ayuda;
-
-
-
-
-            case add -> lexeme_Add;
-            case delete -> lexeme_Delete;
-            case modify -> lexeme_Modify;
-            case get -> lexeme_Get;
-            case verify -> lexeme_Verify;
-            case cancel -> lexeme_Cancel;
-            case report -> lexeme_Report;
-            case list -> lexeme_list;
-            case ver -> lexeme_ver;
-
-
-            case error_Command -> lexeme_Error_Command;
-            case error_Character -> lexeme_Error_Character;
-            default -> "N: "+token;
-        }; ///CU
+public String getStringToken(int token) {
+    String lexeme;
+    switch (token) {
+        case cu:
+            lexeme = lexeme_CU;
+            break;
+        case action:
+            lexeme = lexeme_Action;
+            break;
+        case params:
+            lexeme = lexeme_Params;
+            break;
+        case end:
+            lexeme = lexeme_End;
+            break;
+        case error:
+            lexeme = lexeme_Error;
+            break;
+        case usuario:
+            lexeme = lexeme_User;
+            break;
+        case persona:
+            lexeme = lexeme_Persona;
+            break;
+        case paciente:
+            lexeme = lexeme_Paciente;
+            break;
+        case contrato:
+            lexeme = lexeme_contrato;
+            break;
+        case categoria:
+            lexeme = lexeme_categoria;
+            break;
+        case producto:
+            lexeme = lexeme_producto;
+            break;
+        case tipo_servicio:
+            lexeme = lexeme_tipo_servicio;
+            break;
+        case servicio:
+            lexeme = lexeme_servicio;
+            break;
+        case detalle_servicio:
+            lexeme = lexeme_detalle_servicio;
+            break;
+        case atencion:
+            lexeme = lexeme_atencion;
+            break;
+        case detalle_atencion:
+            lexeme = lexeme_detalle_atencion;
+            break;
+        case pago:
+            lexeme = lexeme_pago;
+            break;
+        case receta:
+            lexeme = lexeme_receta;
+            break;
+        case detalle_receta:
+            lexeme = lexeme_detalle_receta;
+            break;
+        case ayuda:
+            lexeme = lexeme_ayuda;
+            break;
+        case add:
+            lexeme = lexeme_Add;
+            break;
+        case delete:
+            lexeme = lexeme_Delete;
+            break;
+        case modify:
+            lexeme = lexeme_Modify;
+            break;
+        case get:
+            lexeme = lexeme_Get;
+            break;
+        case verify:
+            lexeme = lexeme_Verify;
+            break;
+        case cancel:
+            lexeme = lexeme_Cancel;
+            break;
+        case report:
+            lexeme = lexeme_Report;
+            break;
+        case list:
+            lexeme = lexeme_list;
+            break;
+        case ver:
+            lexeme = lexeme_ver;
+            break;
+        case error_Command:
+            lexeme = lexeme_Error_Command;
+            break;
+        case error_Character:
+            lexeme = lexeme_Error_Character;
+            break;
+        default:
+            lexeme = "N: " + token;
+            break;
     }
+    return lexeme;
+}
     
     
     public int findByLenxeme(String lexeme){

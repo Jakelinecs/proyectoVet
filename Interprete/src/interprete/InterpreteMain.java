@@ -45,22 +45,29 @@ public class InterpreteMain {
                 System.out.println("CU: Persona");
                 System.out.println(event);
                 switch (event.getAction()) {
-                    case Token.add -> bi.insertar(event.getParams(), event.getSender());
-                    case Token.modify -> bi.editar(event.getParams(), event.getSender());
-                    case Token.delete -> bi.eliminar(event.getParams(), event.getSender());
-                    case Token.list -> {
+                    case Token.add:
+                        bi.insertar(event.getParams(), event.getSender());
+                        break;
+                    case Token.modify:
+                        bi.editar(event.getParams(), event.getSender());
+                        break;
+                    case Token.delete:
+                        bi.eliminar(event.getParams(), event.getSender());
+                        break;
+                    case Token.list:
                         System.out.println("Listar");
                         List<String[]> lista = bi.listar(event.getSender());
                         for (String[] dato : lista) {
                             System.out.println(Arrays.toString(dato));
                         }
-                    }
-                    case Token.ver -> {
+                        break;
+                    case Token.ver:
                         String[] x = bi.ver(event.getParams(), event.getSender());
                         System.out.println("Ver");
                         System.out.println(Arrays.toString(x));
-                    }
-                    default -> System.out.println("Accion invalida en el caso de uso ");
+                        break;
+                    default:
+                        System.out.println("Acción inválida en el caso de uso");
                 }
                 List<String> a = new ArrayList<>();
                 a.add(comando);

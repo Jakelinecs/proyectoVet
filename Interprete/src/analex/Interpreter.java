@@ -60,22 +60,53 @@ public class Interpreter implements Runnable{
         }
         
         switch (token_command.getName()) {
-            case Token.usuario -> listener.user(token_event);
-            case Token.persona -> listener.persona(token_event);
-            case Token.paciente -> listener.paciente(token_event);
-            case Token.contrato -> listener.contrato(token_event);
-            case Token.categoria -> listener.categoria(token_event);
-            case Token.producto -> listener.producto(token_event);
-            case Token.tipo_servicio -> listener.tipoServicio(token_event);
-            case Token.servicio -> listener.servicio(token_event);
-            case Token.detalle_servicio -> listener.detalleServicio(token_event);
-            case Token.atencion -> listener.atencion(token_event);
-            case Token.detalle_atencion -> listener.detalleAtencion(token_event);
-            case Token.pago -> listener.pago(token_event);
-            case Token.receta -> listener.receta(token_event);
-            case Token.detalle_receta -> listener.detallereceta(token_event);
-            case Token.ayuda -> listener.ayuda(token_event);
+            case Token.usuario:
+                listener.user(token_event);
+                break;
+            case Token.persona:
+                listener.persona(token_event);
+                break;
+            case Token.paciente:
+                listener.paciente(token_event);
+                break;
+            case Token.contrato:
+                listener.contrato(token_event);
+                break;
+            case Token.categoria:
+                listener.categoria(token_event);
+                break;
+            case Token.producto:
+                listener.producto(token_event);
+                break;
+            case Token.tipo_servicio:
+                listener.tipoServicio(token_event);
+                break;
+            case Token.servicio:
+                listener.servicio(token_event);
+                break;
+            case Token.detalle_servicio:
+                listener.detalleServicio(token_event);
+                break;
+            case Token.atencion:
+                listener.atencion(token_event);
+                break;
+            case Token.detalle_atencion:
+                listener.detalleAtencion(token_event);
+                break;
+            case Token.pago:
+                listener.pago(token_event);
+                break;
+            case Token.receta:
+                listener.receta(token_event);
+                break;
+            case Token.detalle_receta:
+                listener.detallereceta(token_event);
+                break;
+            case Token.ayuda:
+                listener.ayuda(token_event);
+                break;
         }
+
     }   
     
     
