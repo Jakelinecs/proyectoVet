@@ -1,6 +1,10 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Negocio;
 
-import Data.DPersona;
+import Data.DBitacora;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -9,38 +13,32 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * 
  *
  * @author HP
  */
-public class NPersona implements INegocio{
-    private DPersona dato;
+public class NBitacora implements INegocio{
+    private DBitacora dato;
 
-    public NPersona() {
-        dato= new DPersona();
+    public NBitacora() {
+        dato= new DBitacora();
     }
     
 
+    public static final String[] headers={ 
+             "id","nombre","descripcion","estado","created_at","updated_at"};
     @Override
     public void insertar(List<String> parametros,String email) {
         try {
-            dato.setId(Integer.valueOf(parametros.get(0)));
-            dato.setNombre(parametros.get(1));
-            dato.setApp_apm(parametros.get(2));
-            dato.setSexo(parametros.get(3));
-            dato.setF_nacimiento(parametros.get(4));
-            dato.setCelular(parametros.get(5));
-            dato.setDireccion(parametros.get(6));
-            dato.setCreated_at();
-            dato.setUpdated_at();
+
+            dato.setComando(parametros.get(0));
             dato.setCorreo(email);
-            
+            dato.setFecha_hr();
             dato.insertar();
             dato.desconectar();
         } catch (SQLException ex) {
-            Logger.getLogger(NPersona.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NPaciente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            Logger.getLogger(NPersona.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NBitacora.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -48,19 +46,14 @@ public class NPersona implements INegocio{
     public void editar(List<String> parametros,String email) {
         try {
             dato.setId(Integer.valueOf(parametros.get(0)));
-            dato.setNombre(parametros.get(1));
-            dato.setApp_apm(parametros.get(2));
-            dato.setSexo(parametros.get(3));
-            dato.setF_nacimiento(parametros.get(4));
-            dato.setCelular(parametros.get(5));
-            dato.setDireccion(parametros.get(6));
-            dato.setUpdated_at();
+            dato.setComando(parametros.get(1));
             dato.setCorreo(email);
+            dato.setFecha_hr();
             
             dato.editar();
             dato.desconectar();
         } catch (SQLException ex) {
-            Logger.getLogger(NPersona.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -73,7 +66,7 @@ public class NPersona implements INegocio{
             dato.eliminar();
             dato.desconectar();
         } catch (SQLException ex) {
-            Logger.getLogger(NPersona.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -85,7 +78,7 @@ public class NPersona implements INegocio{
             lista = dato.listar();
             dato.desconectar();
         } catch (SQLException ex) {
-            Logger.getLogger(NPersona.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
     }
@@ -95,14 +88,13 @@ public class NPersona implements INegocio{
         String[] d = null;
         try {
             dato.setCorreo(email);
-            dato.setId(Integer.valueOf(parametros.get(0)));
-            
             d = dato.ver();
             dato.desconectar();
         } catch (SQLException ex) {
-            Logger.getLogger(NPersona.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return d;
     }
     
+
 }

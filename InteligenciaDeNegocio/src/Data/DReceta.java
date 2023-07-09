@@ -140,7 +140,7 @@ public class DReceta {
         if (dato != -1) {
             String sql = "select * from recetas WHERE id=?";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
-            ps.setInt(0, id);
+            ps.setInt(1, id);
             ResultSet set = ps.executeQuery();
             if (set.next()) {
                 usuario = new String[]{

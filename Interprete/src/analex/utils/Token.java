@@ -167,6 +167,9 @@ public class Token {
             case params -> lexeme_Params;
             case end -> lexeme_End;
             case error -> lexeme_Error;
+
+
+
             case usuario -> lexeme_User;
             case persona -> lexeme_Persona;
             case paciente -> lexeme_Paciente;
@@ -182,6 +185,10 @@ public class Token {
             case receta -> lexeme_receta;
             case detalle_receta -> lexeme_detalle_receta;
             case ayuda -> lexeme_ayuda;
+
+
+
+
             case add -> lexeme_Add;
             case delete -> lexeme_Delete;
             case modify -> lexeme_Modify;
@@ -191,6 +198,8 @@ public class Token {
             case report -> lexeme_Report;
             case list -> lexeme_list;
             case ver -> lexeme_ver;
+
+
             case error_Command -> lexeme_Error_Command;
             case error_Character -> lexeme_Error_Character;
             default -> "N: "+token;
@@ -243,8 +252,6 @@ public class Token {
                 return detalle_receta;
             case lexeme_ayuda:
                 return ayuda;
-            case lexeme_list:
-                return list;
 
 
 
@@ -267,6 +274,8 @@ public class Token {
                 return  report;
             case lexeme_ver:
                 return  ver;
+            case lexeme_list:
+                return list;
 
 
 

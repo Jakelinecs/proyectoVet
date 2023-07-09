@@ -215,7 +215,7 @@ public class DProducto {
         String[] usuario=null;
         String sql="SELECT * FROM productos WHERE id=?";
         PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
-        ps.setInt(0, id);
+        ps.setInt(1, id);
         ResultSet set= ps.executeQuery();
 
         if(set.next()){

@@ -6,12 +6,14 @@ public class Extractor {
     private static String YAHOO = "d=yahoo";
     private static String OUTLOOK = "d=microsoft.com";
     private static String FICCT_UAGRM = "d=ficct.uagrm.edu.bo";
-    private static String TECNO_WEB = "www.tecnoweb.org.bo";
+    private static String TECNO_WEB = "Received: from mail.tecnoweb.org.bo";
+    private static String KREATIVADO = "d=kreativabo.com";
 
     public static Email getEmail(String plain_text) {
 //        System.out.println("-----------------------------------------------");
 //        System.out.println(plain_text);
 //        System.out.println("-----------------------------------------------");
+        //optiene el mensaje en bruto
         // String from, String to, String subject, String message
         String from = getFrom(plain_text);
         String to = getTo(plain_text);
@@ -44,6 +46,8 @@ public class Extractor {
                 end_string = "From: ";
             } else if (plain_text.contains(TECNO_WEB)) {
                 end_string = "User-Agent: ";
+            } else if (plain_text.contains(KREATIVADO)) {
+                end_string = "To: ";
             }
             int e = plain_text.indexOf(end_string, i);
             return plain_text.substring(i, e).replace("\n", "");
@@ -69,7 +73,7 @@ public class Extractor {
         String to = "";
         if (plain_text.contains(GMAIL) || plain_text.contains(FICCT_UAGRM)|| plain_text.contains(TECNO_WEB)) {
             to = getToFromGmail(plain_text);
-        } else if (plain_text.contains(HOTMAIL)) {
+        } else if (plain_text.contains(HOTMAIL) || plain_text.contains(KREATIVADO)) {
             to = getToFromHotmail(plain_text);
         } else if (plain_text.contains(YAHOO) || plain_text.contains(OUTLOOK)) {
             to = getToFromYahooOrOutlook(plain_text);
@@ -99,8 +103,8 @@ public class Extractor {
         int index_end = plain_text.indexOf("\n", index_begin);
         return plain_text.substring(index_begin, index_end);
     }
-    
-        private static String getMensaje(String plain_text) {
+
+    private static String getMensaje(String plain_text) {
         String search = "Subject: ";
         int i = plain_text.indexOf(search) + search.length();
         String end_string = "";
@@ -116,18 +120,25 @@ public class Extractor {
             } else if (plain_text.contains(FICCT_UAGRM)) {
                 end_string = "From: ";
             } else if (plain_text.contains(TECNO_WEB)) {
-                search = "Content-Transfer-Encoding:";
+                String subString = "Content-Transfer-Encoding:";
+                i = plain_text.indexOf(subString);
+                int index = plain_text.indexOf('\n', i);
+                search = plain_text.substring(i, index);               
                 end_string = plain_text;
+            } else if (plain_text.contains(KREATIVADO)) {
+                search = "Content-Type: text/plain; charset=\"UTF-8\"";
+                end_string = "--00000";
             }
             i = plain_text.indexOf(search) + search.length();
-            int e = plain_text.indexOf(end_string, i);
-            return plain_text.substring(i, e);
+            int index = plain_text.indexOf('\n', i);
+            int e = plain_text.indexOf(end_string, index);
+            return plain_text.substring(index, e).replace("\n", "");
         } catch (Exception exception) {
             if (plain_text.contains(FICCT_UAGRM)) {
                 i = plain_text.indexOf(search) + search.length();
                 end_string = "Message-ID: ";
                 int e = plain_text.indexOf(end_string, i);
-                return plain_text.substring(i, e).replace("\n", "");
+                return plain_text.substring(i, e);
             }
             if (plain_text.contains(TECNO_WEB)) {
                 i = plain_text.indexOf(search) + search.length();
@@ -138,5 +149,4 @@ public class Extractor {
             return "NO SUBJECT";
         }
     }
-
 }

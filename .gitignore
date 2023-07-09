@@ -1,3 +1,6 @@
 
 Video 1.mp4
 *.mp4
+/SistemaCentralEmail/build/
+/ConeccionSocket/dist/
+/InteligenciaDeNegocio/dist/

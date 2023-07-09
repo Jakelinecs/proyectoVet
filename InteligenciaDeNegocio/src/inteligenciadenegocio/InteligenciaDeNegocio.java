@@ -1,26 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package inteligenciadenegocio;
 
-import Negocio.INegocio;
-import Negocio.NActivo;
-import Negocio.NAtencionClinica;
-import Negocio.NCategoria;
-import Negocio.NContrato;
-import Negocio.NDetalleAtencion;
-import Negocio.NDetalleReceta;
-import Negocio.NDetalleServicio;
-import Negocio.NInventario;
-import Negocio.NPaciente;
-import Negocio.NPago;
-import Negocio.NPersona;
-import Negocio.NProducto;
-import Negocio.NReceta;
-import Negocio.NServicio;
-import Negocio.NTipoServicio;
-import Negocio.NUsers;
+import Negocio.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -68,17 +48,8 @@ public class InteligenciaDeNegocio {
         */
 //        NProducto negocio = new NProducto();
      //   NUsers negocio = new NUsers();
-        INegocio negocio = new NPersona();
+        INegocio negocio = new NBitacora();
      
-        List<String> data= new ArrayList<>();
-        
-        data.add("2");
-        //data.add("diclofenaco en gotas");
-        //data.add("15 gotas cada 8 hrs por 7 dias");
-        String[] x = negocio.ver(data,email);
-        System.out.println("---------------");
-        System.out.println(Arrays.toString(x));
-        System.out.println("---------------");
      
 
         List<String[]> lista = negocio.listar(email);

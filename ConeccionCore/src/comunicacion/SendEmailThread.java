@@ -7,18 +7,13 @@ package comunicacion;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.NoSuchProviderException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.*;
 import Util.Email;
 
 
@@ -62,8 +57,8 @@ public class SendEmailThread implements Runnable{
        
         properties.setProperty("mail.smtp.host", host);
         properties.setProperty("mail.smtp.port", port_SMTP);
-        properties.setProperty("mail.smtp.tls.enable", "true");//usando tecnoWeb
-        //properties.setProperty("mail.smtp.ssl.enable", "true");//usando Gmail
+        //properties.setProperty("mail.smtp.tls.enable", "true");//usando tecnoWeb
+        properties.setProperty("mail.smtp.ssl.enable", "true");//usando Gmail
         properties.setProperty("mail.smtp.auth", "true");
      Session session;
         session = Session.getDefaultInstance(properties,new javax.mail.Authenticator(){
@@ -80,10 +75,10 @@ public class SendEmailThread implements Runnable{
             
             InternetAddress[] toAddresses = {new InternetAddress(email.getTo())};
             
-            message.setRecipients(RecipientType.TO, toAddresses);
+            message.setRecipients(MimeMessage.RecipientType.TO, toAddresses);
             message.setSubject(email.getSubject());
             
-            Multipart multipart = new MimeMultipart("älternative");
+            Multipart multipart = new MimeMultipart("alternative");
             MimeBodyPart htmlPart= new MimeBodyPart();
             
             htmlPart.setContent(email.getMessage(),"text/html; charset = utf-8");

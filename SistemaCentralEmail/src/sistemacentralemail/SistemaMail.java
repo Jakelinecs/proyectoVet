@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemacentralemail;
 // importar modelos 
 
 import Data.DPersona;
+import Negocio.*;
 import Negocio.NPersona;
 import Util.Email;
 import analex.Interpreter;
@@ -16,6 +13,7 @@ import comunicacion.SendEmailThread;
 import events.TokenEvent;
 import interfaces.IEmailEventListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import utils.HtmlBuilder;
 
@@ -24,7 +22,7 @@ import utils.HtmlBuilder;
  *
  * @author HP
  */
-public class SistemaMail implements IEmailEventListener,ItokenEvenListener{
+public abstract class SistemaMail implements IEmailEventListener, ItokenEvenListener{
     public static final int constant_Error = -2;
     public static final int numer_format_Error = -3;
     public static final int index_Out_Of_Bount_Error = -4;
@@ -34,11 +32,11 @@ public class SistemaMail implements IEmailEventListener,ItokenEvenListener{
     
     private MailVerificationThread mailVerificationThread;
     
-    /////CU
-    //private NUsers bUser;
     private NPersona bPersona;
+    private INegocio bi;
+    private INegocio bitacora = new NBitacora();
     
-    
+    String comando;
     public SistemaMail(){
         mailVerificationThread= new MailVerificationThread();
         mailVerificationThread.setEmailEventListener(SistemaMail.this);
@@ -53,6 +51,7 @@ public class SistemaMail implements IEmailEventListener,ItokenEvenListener{
     @Override
     public void onRecieveEmailEvent(List<Email> emails) {
         for (Email email : emails) {
+            comando =email.getSubject();
             Interpreter interprete = new Interpreter(email.getSubject(),email.getFrom());
             interprete.setListener(SistemaMail.this);
             Thread thread = new Thread(interprete);
@@ -86,10 +85,8 @@ public class SistemaMail implements IEmailEventListener,ItokenEvenListener{
         
     }
 
-    public void amigos(TokenEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    public abstract void miMetodoAbstracto(String[] dato);
+ 
     @Override
     public void error(TokenEvent event) {
         handleError(event.getAction(),event.getSender(),event.getParams());
@@ -189,28 +186,7 @@ public class SistemaMail implements IEmailEventListener,ItokenEvenListener{
         thread.start();
     }
 
-    @Override
-    public void persona(TokenEvent event) {
-        try{
-                switch(event.getAction()){
-                    case Token.add:
-                        bPersona.insertar(event.getParams(),event.getSender());
-                        simpleNotifySuccess(event.getSender(),"Ususario guardado Corectamente");
-                        break;
-                    case Token.get:
-                        tableNotifySuccess(event.getSender(),"listado de Persona",DPersona.headers, (ArrayList<String[]>) bPersona.listar(event.getSender()));
-                        break;
-                }
-                handleError(autorization_Error, event.getSender(),null);
-        }catch(NumberFormatException ex){
-                handleError(numer_format_Error, event.getSender(),null);
-                handleError(constant_Error, event.getSender(),null);
-        }catch(IndexOutOfBoundsException ex){
-                handleError(index_Out_Of_Bount_Error, event.getSender(),null);
-        }
-        
-    }
-
+   
     @Override
     public void paciente(TokenEvent event) {
         try{
@@ -292,5 +268,36 @@ public class SistemaMail implements IEmailEventListener,ItokenEvenListener{
     @Override
     public void ayuda(TokenEvent event) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void persona(TokenEvent event) {
+        System.out.println("CU: Persona");
+        System.out.println(event);
+        switch (event.getAction()) {
+            case Token.add -> bi.insertar(event.getParams(), event.getSender());
+            case Token.modify -> bi.editar(event.getParams(), event.getSender());
+            case Token.delete -> bi.eliminar(event.getParams(), event.getSender());
+            case Token.list -> {
+                System.out.println("Listar");
+                List<String[]> lista = bi.listar(event.getSender());
+                for (String[] dato : lista) {
+                    System.out.println(Arrays.toString(dato));
+                }
+            }
+            case Token.ver -> {
+                String[] x = bi.ver(event.getParams(), event.getSender());
+                System.out.println("Ver");
+                System.out.println(Arrays.toString(x));
+            }
+            default -> System.out.println("Accion invalida en el caso de uso ");
+        }
+        List<String> a = new ArrayList<>();
+        a.add(comando);
+        bitacora.insertar( a, event.getSender());
+        String[]dato = bitacora.ver( a, event.getSender());
+
+        miMetodoAbstracto(dato);
+        handleError(autorization_Error, event.getSender(),null);
     }
 }

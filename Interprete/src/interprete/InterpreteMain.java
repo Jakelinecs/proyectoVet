@@ -4,13 +4,16 @@
  */
 package interprete;
 
+import Negocio.*;
 import Negocio.INegocio;
 import Negocio.NPersona;
 import analex.Interpreter;
 import analex.interfaces.ItokenEvenListener;
 import analex.utils.Token;
 import events.TokenEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -24,9 +27,10 @@ public class InterpreteMain {
     public static void main(String[] args) {
         // TODO code application logic here
         //String comando = "paciente_add(Firulay,canina,salchicha,macho,megro,12-05-2020,1,null)";
-        String comando = "persona ver <1>";
+        String comando = "persona list ";
         String correo = "jakeli1997.jcs@gmail.com";
         NPersona bi = new NPersona();
+        INegocio bitacora = new NBitacora();
         Interpreter interprete = new Interpreter(comando, correo);
 
         interprete.setListener(new ItokenEvenListener() {
@@ -44,14 +48,23 @@ public class InterpreteMain {
                     case Token.add -> bi.insertar(event.getParams(), event.getSender());
                     case Token.modify -> bi.editar(event.getParams(), event.getSender());
                     case Token.delete -> bi.eliminar(event.getParams(), event.getSender());
-                    case Token.list -> bi.listar(event.getSender());
+                    case Token.list -> {
+                        System.out.println("Listar");
+                        List<String[]> lista = bi.listar(event.getSender());
+                        for (String[] dato : lista) {
+                            System.out.println(Arrays.toString(dato));
+                        }
+                    }
                     case Token.ver -> {
                         String[] x = bi.ver(event.getParams(), event.getSender());
-                        System.out.println("okey");
+                        System.out.println("Ver");
                         System.out.println(Arrays.toString(x));
                     }
                     default -> System.out.println("Accion invalida en el caso de uso ");
                 }
+                List<String> a = new ArrayList<>();
+                a.add(comando);
+                bitacora.insertar( a, event.getSender());
             }
 
             @Override

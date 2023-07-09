@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Data;
 
 import Utlis.DateString;
@@ -184,7 +180,7 @@ public class DCategoria {
         String[] usuario=null;
         String sql="SELECT * FROM categorias WHERE id=?";
         PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
-        ps.setInt(0, id);
+        ps.setInt(1, id);
         ResultSet set= ps.executeQuery();
 
         if(set.next()){
