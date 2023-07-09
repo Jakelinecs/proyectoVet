@@ -13,7 +13,9 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.activation.*;
 import javax.mail.internet.*;
+;
 import Util.Email;
 
 
@@ -23,7 +25,6 @@ import Util.Email;
  */
 public class SendEmailThread implements Runnable{
 
-    private Email email;
 /*
     private final static String port_SMTP="25";
     private final static String protocol="smtp";
@@ -33,8 +34,9 @@ public class SendEmailThread implements Runnable{
     private final static String mail_Password="grupo005grupo005";
   */  
     
+    private Email email;
     
- private final static String port_SMTP="465";
+    private final static String port_SMTP="465";
     private final static String protocol="smtp";
     private final static String host="mail.tecnoweb.org.bo";
     private final static String user="grupo09sa";
@@ -87,11 +89,9 @@ public class SendEmailThread implements Runnable{
             message.saveChanges();
             
             Transport.send(message);
-        }     catch(NoSuchProviderException | AddressException ex){
-                Logger.getLogger(SendEmailThread.class.getName()).log(Level.SEVERE,null,ex);
-        }     catch(MessagingException ex){
-                Logger.getLogger(SendEmailThread.class.getName()).log(Level.SEVERE,null,ex);
-        }
+        } catch (MessagingException ex) {
+            Logger.getLogger(SendEmailThread.class.getName()).log(Level.SEVERE, null, ex);
+        }     
     }
     
 }

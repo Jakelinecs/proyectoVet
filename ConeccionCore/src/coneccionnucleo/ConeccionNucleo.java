@@ -1,17 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package coneccionnucleo;
 
-import Negocio.*;
 import Util.Email;
-import analex.*;
 import comunicacion.*;
-import events.TokenEvent;
-import interfaces.IEmailEventListener;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  *
@@ -50,12 +40,13 @@ public class ConeccionNucleo {
         //Email emailObjet = new Email("jakeli1997.jcs@gmail.com", "hola", "Peticion Prueva realizada correctamente");
         Email emailObjet = new Email("grupo05sa@tecnoweb.org.bo", Email.SUBJECT, "Peticion Prueva realizada correctamente");
 
-        SendEmailThread sendEmail= new SendEmailThread(emailObjet);
+        //SendEmailThread sendEmail= new SendEmailThread(emailObjet);
+        EnvioSMS sendEmail= new EnvioSMS(emailObjet);
         
-        Thread thread = new Thread(sendEmail);
+        /*Thread thread = new Thread(sendEmail);
         thread.setName("Send Mail Thread");
         thread.start();
-        
+        */
     }
     /**
     public static void interprete(Email email){

@@ -23,7 +23,6 @@ import utils.HtmlBuilder;
 
 
 /**
- *
  * @author HP
  */
 public class Central extends javax.swing.JFrame{
@@ -37,7 +36,8 @@ public class Central extends javax.swing.JFrame{
         negocio = new NBitacora();
         listar() ;
         
-        SistemaMail app = new SistemaMail() {
+        SistemaMail app;
+        app = new SistemaMail() {
             @Override
             public void miMetodoAbstracto(String[] dato) {
                 jTextAreaBitacora.append(Arrays.toString(dato) + '\n');

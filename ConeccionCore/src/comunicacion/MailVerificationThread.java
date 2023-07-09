@@ -127,6 +127,7 @@ public class MailVerificationThread implements Runnable {
                 if (count>0) {
                     emails=getEmails(count);
                     System.out.println(emails);
+                    
                     deleteEmails(count);
                 }
                 
