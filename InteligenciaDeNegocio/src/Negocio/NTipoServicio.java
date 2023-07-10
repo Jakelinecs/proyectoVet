@@ -102,4 +102,10 @@ public class NTipoServicio implements INegocio {
         }
         return d;
     }
+    
+        @Override
+    public String[]  headers() {
+        return dato.headers;
+    }
+
 }

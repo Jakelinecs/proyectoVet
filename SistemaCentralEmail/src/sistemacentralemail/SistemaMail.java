@@ -1,7 +1,8 @@
 package sistemacentralemail;
 // importar modelos 
 
-import Data.DPersona;
+import Data.*;
+import static Data.DPersona.headers;
 import Negocio.*;
 import Negocio.NPersona;
 import Util.Email;
@@ -35,8 +36,24 @@ public abstract class SistemaMail implements IEmailEventListener {
     private NPersona bPersona = new NPersona();
     private INegocio bitacora = new NBitacora();
 
+    public NUsers bUsuario = new NUsers();
+    public NPaciente bPaciente = new NPaciente();
+    public NContrato bContrato = new NContrato();
+    public NCategoria bCategoria = new NCategoria();
+    public NProducto bProducto = new NProducto();
+    public NTipoServicio bTipo_servicio = new NTipoServicio();
+    public NServicio bServicio = new NServicio();
+    public NDetalleServicio bDetalle_servicio = new NDetalleServicio();
+    public NAtencionClinica bAtencion = new NAtencionClinica();
+    public NDetalleAtencion bDetalle_atencion = new NDetalleAtencion();
+    public NPago bPago = new NPago();
+    public NReceta bReceta = new NReceta();
+    public NDetalleReceta bDetalle_receta = new NDetalleReceta();
+    //public NAyuda NAyuda = new NAyuda();
+
     String comando;
     String[] dato;
+
     public SistemaMail() {
         mailVerificationThread = new MailVerificationThread();
         mailVerificationThread.setEmailEventListener(SistemaMail.this);
@@ -57,11 +74,35 @@ public abstract class SistemaMail implements IEmailEventListener {
             Interpreter interprete = new Interpreter(email.getSubject(), email.getFrom());
 
             interprete.setListener(new ItokenEvenListener() {
-
+                Email emailObject = null;
                 @Override
                 public void user(TokenEvent event) {
                     System.out.println("CU: Users");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bUsuario.insertar(event.getParams(), event.getSender());
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            List<String[]> lista = bUsuario.listar(event.getSender());
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            break;
+                        case Token.ver:
+                            String[] x = bUsuario.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            break;
+                        default:
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override
@@ -71,6 +112,7 @@ public abstract class SistemaMail implements IEmailEventListener {
                     switch (event.getAction()) {
                         case Token.add:
                             bPersona.insertar(event.getParams(), event.getSender());
+                            simpleNotifySuccess(event.getSender(), "Persona Registrada Corectamente");
                             break;
                         case Token.modify:
                             bPersona.editar(event.getParams(), event.getSender());
@@ -81,9 +123,11 @@ public abstract class SistemaMail implements IEmailEventListener {
                         case Token.list:
                             System.out.println("Listar");
                             List<String[]> lista = bPersona.listar(event.getSender());
+                            
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
+                            tableNotifySuccess(event.getSender(), Lista de Personas, bPersona.headers() , lista);
                             break;
                         case Token.ver:
                             String[] x = bPersona.ver(event.getParams(), event.getSender());
@@ -104,66 +148,396 @@ public abstract class SistemaMail implements IEmailEventListener {
                 public void paciente(TokenEvent event) {
                     System.out.println("CU: Paciente");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bPaciente.insertar(event.getParams(), event.getSender());
+                            break;
+                        case Token.modify:
+                            bPaciente.editar(event.getParams(), event.getSender());
+                            break;
+                        case Token.delete:
+                            bPaciente.eliminar(event.getParams(), event.getSender());
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            List<String[]> lista = bPaciente.listar(event.getSender());
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            break;
+                        case Token.ver:
+                            String[] x = bPaciente.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            break;
+                        default:
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override
                 public void contrato(TokenEvent event) {
                     System.out.println("CU: Paciente");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bContrato.insertar(event.getParams(), event.getSender());
+                            break;
+                        case Token.modify:
+                            bContrato.editar(event.getParams(), event.getSender());
+                            break;
+                        case Token.delete:
+                            bContrato.eliminar(event.getParams(), event.getSender());
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            List<String[]> lista = bContrato.listar(event.getSender());
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            break;
+                        case Token.ver:
+                            String[] x = bContrato.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            break;
+                        default:
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override
                 public void categoria(TokenEvent event) {
                     System.out.println("CU: contrato");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bCategoria.insertar(event.getParams(), event.getSender());
+                            break;
+                        case Token.modify:
+                            bCategoria.editar(event.getParams(), event.getSender());
+                            break;
+                        case Token.delete:
+                            bCategoria.eliminar(event.getParams(), event.getSender());
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            List<String[]> lista = bCategoria.listar(event.getSender());
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            break;
+                        case Token.ver:
+                            String[] x = bCategoria.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            break;
+                        default:
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override
                 public void producto(TokenEvent event) {
                     System.out.println("CU: producto");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bProducto.insertar(event.getParams(), event.getSender());
+                            break;
+                        case Token.modify:
+                            bProducto.editar(event.getParams(), event.getSender());
+                            break;
+                        case Token.delete:
+                            bProducto.eliminar(event.getParams(), event.getSender());
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            List<String[]> lista = bProducto.listar(event.getSender());
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            break;
+                        case Token.ver:
+                            String[] x = bProducto.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            break;
+                        default:
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override
                 public void tipoServicio(TokenEvent event) {
                     System.out.println("CU: tipoServicio");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bTipo_servicio.insertar(event.getParams(), event.getSender());
+                            break;
+                        case Token.modify:
+                            bTipo_servicio.editar(event.getParams(), event.getSender());
+                            break;
+                        case Token.delete:
+                            bTipo_servicio.eliminar(event.getParams(), event.getSender());
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            List<String[]> lista = bTipo_servicio.listar(event.getSender());
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            break;
+                        case Token.ver:
+                            String[] x = bTipo_servicio.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            break;
+                        default:
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override
                 public void servicio(TokenEvent event) {
                     System.out.println("CU: servicio");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bServicio.insertar(event.getParams(), event.getSender());
+                            break;
+                        case Token.modify:
+                            bServicio.editar(event.getParams(), event.getSender());
+                            break;
+                        case Token.delete:
+                            bServicio.eliminar(event.getParams(), event.getSender());
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            List<String[]> lista = bServicio.listar(event.getSender());
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            break;
+                        case Token.ver:
+                            String[] x = bServicio.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            break;
+                        default:
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override
                 public void receta(TokenEvent event) {
                     System.out.println("CU: receta");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bReceta.insertar(event.getParams(), event.getSender());
+                            break;
+                        case Token.modify:
+                            bReceta.editar(event.getParams(), event.getSender());
+                            break;
+                        case Token.delete:
+                            bReceta.eliminar(event.getParams(), event.getSender());
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            List<String[]> lista = bReceta.listar(event.getSender());
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            break;
+                        case Token.ver:
+                            String[] x = bReceta.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            break;
+                        default:
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override
                 public void pago(TokenEvent event) {
                     System.out.println("CU: pago");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bPago.insertar(event.getParams(), event.getSender());
+                            break;
+                        case Token.modify:
+                            bPago.editar(event.getParams(), event.getSender());
+                            break;
+                        case Token.delete:
+                            bPago.eliminar(event.getParams(), event.getSender());
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            List<String[]> lista = bPago.listar(event.getSender());
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            break;
+                        case Token.ver:
+                            String[] x = bPago.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            break;
+                        default:
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override
                 public void detalleServicio(TokenEvent event) {
                     System.out.println("CU: detalleServicio");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bDetalle_servicio.insertar(event.getParams(), event.getSender());
+                            break;
+                        case Token.modify:
+                            bDetalle_servicio.editar(event.getParams(), event.getSender());
+                            break;
+                        case Token.delete:
+                            bDetalle_servicio.eliminar(event.getParams(), event.getSender());
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            List<String[]> lista = bDetalle_servicio.listar(event.getSender());
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            break;
+                        case Token.ver:
+                            String[] x = bDetalle_servicio.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            break;
+                        default:
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override
                 public void atencion(TokenEvent event) {
                     System.out.println("CU: atencion");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bAtencion.insertar(event.getParams(), event.getSender());
+                            break;
+                        case Token.modify:
+                            bAtencion.editar(event.getParams(), event.getSender());
+                            break;
+                        case Token.delete:
+                            bAtencion.eliminar(event.getParams(), event.getSender());
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            List<String[]> lista = bAtencion.listar(event.getSender());
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            break;
+                        case Token.ver:
+                            String[] x = bAtencion.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            break;
+                        default:
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override
                 public void detalleAtencion(TokenEvent event) {
                     System.out.println("CU: detalleAtencion");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bDetalle_atencion.insertar(event.getParams(), event.getSender());
+                            break;
+                        case Token.modify:
+                            bDetalle_atencion.editar(event.getParams(), event.getSender());
+                            break;
+                        case Token.delete:
+                            bDetalle_atencion.eliminar(event.getParams(), event.getSender());
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            List<String[]> lista = bDetalle_atencion.listar(event.getSender());
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            break;
+                        case Token.ver:
+                            String[] x = bDetalle_atencion.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            break;
+                        default:
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override
@@ -176,6 +550,36 @@ public abstract class SistemaMail implements IEmailEventListener {
                 public void detallereceta(TokenEvent event) {
                     System.out.println("CU: detallereceta");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bDetalle_receta.insertar(event.getParams(), event.getSender());
+                            break;
+                        case Token.modify:
+                            bDetalle_receta.editar(event.getParams(), event.getSender());
+                            break;
+                        case Token.delete:
+                            bDetalle_receta.eliminar(event.getParams(), event.getSender());
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            List<String[]> lista = bDetalle_receta.listar(event.getSender());
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            break;
+                        case Token.ver:
+                            String[] x = bDetalle_receta.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            break;
+                        default:
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
                 @Override
@@ -288,6 +692,7 @@ public abstract class SistemaMail implements IEmailEventListener {
          * thread.start();
          *
          */
+        EnvioSMS sendEmail = new EnvioSMS(email);
         //EnvioSMS sendEmail= new EnvioSMS(email);
 
     }

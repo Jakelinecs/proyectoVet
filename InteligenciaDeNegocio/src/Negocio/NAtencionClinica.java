@@ -95,4 +95,10 @@ public class NAtencionClinica implements INegocio {
         }
         return d;
     }
+    
+    @Override
+    public String[]  headers() {
+        return dato.headers;
+    }
+
 }

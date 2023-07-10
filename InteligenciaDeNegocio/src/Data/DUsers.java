@@ -25,7 +25,9 @@ public class DUsers {
     int id;
     String name,email,email_verified_at,password,estilo,fuente,remember_token,created_at,updated_at;
     
-    
+        public static final String[] headers = {"id", "name", "email", "email_verified_at", "password", "estilo",
+            "fuente", "remember_token", "created_at", "updated_at"};
+
     
     
     public void insertar() throws SQLException{

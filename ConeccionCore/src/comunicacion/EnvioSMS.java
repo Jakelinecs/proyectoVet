@@ -26,7 +26,7 @@ public class EnvioSMS {
         int puerto = 25;
 
     public EnvioSMS(Email email) {
-        setMessaj(email.getTo(),email.getSubject(), email.getMessage());
+        setMessaj(email.getFrom(),email.getSubject(), email.getMessage());
     }
         
         
@@ -68,12 +68,19 @@ public class EnvioSMS {
                     System.out.println("S : " + entrada.readLine());
 
 
+                    
+                    
+                        
+                    
+                    
+                    
+                    
                     comando = "DATA\n";
                     System.out.print("C : " + comando);
                     salida.writeBytes(comando);
                     System.out.println("S : " + getMultiline(entrada));
 
-                    comando = subject+"\r\n" + data + ".\r\n";
+                    comando = "Subject:"+subject+"\r\n" + data + ".\r\n"+ ".\r\n";
                     System.out.print("C : " + comando);
                     salida.writeBytes(comando);
                     System.out.println("S : " + entrada.readLine());

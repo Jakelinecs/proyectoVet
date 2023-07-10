@@ -96,4 +96,10 @@ public class NInventario implements INegocio {
         }
         return d;
     }
+    
+        @Override
+    public String[]  headers() {
+        return dato.headers;
+    }
+
 }

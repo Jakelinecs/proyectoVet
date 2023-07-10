@@ -18,4 +18,5 @@ public void eliminar(List<String> parametros,String email);
 public List<String[]> listar(String email);
 public String[] ver(List<String> parametros,String email);
 
+public String[]  headers();
 }

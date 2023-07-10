@@ -36,17 +36,25 @@ public class ConeccionNucleo {
         thread.start();
             */
         
-        ///prueba de  envio de correo
         Email emailObjet = new Email("jakeli1997.jcs@gmail.com", "hola", "Peticion Prueva realizada correctamente");
+        ///prueba de  envio de correo
         //Email emailObjet = new Email("grupo05sa@tecnoweb.org.bo", Email.SUBJECT, "Peticion Prueva realizada correctamente");
 
         //SendEmailThread sendEmail= new SendEmailThread(emailObjet);
         EnvioSMS sendEmail= new EnvioSMS(emailObjet);
         
-        /*Thread thread = new Thread(sendEmail);
-        thread.setName("Send Mail Thread");
-        thread.start();
-        */
+        
+        
+        //ClienteSmtpV2 smtp = new ClienteSmtpV2();
+         //   if (smtp.enviarCorreo(emailObjet)) {
+          //      System.out.println(" S : Se envio el mensaje");
+                //pop.eliminarCorreo(mensaje.getId());
+           // }
+        
+        //Thread thread = new Thread(sendEmail);
+        //thread.setName("Send Mail Thread");
+        //thread.start();
+        
     }
     /**
     public static void interprete(Email email){
