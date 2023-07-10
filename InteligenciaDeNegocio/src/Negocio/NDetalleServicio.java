@@ -24,7 +24,13 @@ public class NDetalleServicio implements INegocio {
     }
 
     public static final String[] headers = {"id", "idservicio", "tipo_servicio", "nro_servicio", "costo", "created_at", "updated_at"};
-
+       /*detalleServicio add<identificadorServicio;tipoServicio;numeroServico;costo>
+    detalleServicio add<1;peluqueria;4;85>
+    detalleServicio delete<1>
+    detalleServicio modify<1;desparasitacion;4;105>
+    detalleServicio list<>
+    detalleServicio ver<1>
+   */  
     @Override
     public void insertar(List<String> parametros, String email) {
         try {

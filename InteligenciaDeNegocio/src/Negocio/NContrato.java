@@ -27,7 +27,13 @@ public class NContrato implements INegocio {
     public static final String[] headers = {
             "id", "detalle", "f_ini", "f_fin", "idpersonal", "iduser", "estado", "created_at", "updated_at"
     };
-
+    /*contrato add<identificador;detalle;fechaIncio;fechaFin;identificadorPersonal;usuario;estado>
+    contrato add<1;contrato fijo;2019-06-8;2020-08-12;4;Marina; pendiente>
+    contrato delete<1>
+    contrato modify<1;contrato Indefinido;2019-06-8;2020-08-12;4;Marina; pendiente>
+    contrato list<>
+    contrato ver<1>
+   */  
     @Override
     public void insertar(List<String> parametros, String email) {
         try {

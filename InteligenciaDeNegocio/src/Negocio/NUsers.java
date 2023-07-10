@@ -22,7 +22,11 @@ public class NUsers implements INegocio {
     public NUsers() {
         dato = new DUsers();
     }
-
+    /*Users add<identificador,nombre,email,contraseña,estilo>
+    Users add<1,Marina,marinamejj123@gmail.com,12345678,normal>
+    Users list<>
+    Users ver<2>
+   */  
     @Override
     public void insertar(List<String> parametros, String email) {
         try {

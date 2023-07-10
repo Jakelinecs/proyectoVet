@@ -24,7 +24,13 @@ public class NInventario implements INegocio {
     }
 
     public static final String[] headers = {"id", "idactivo", "idproducto", "detalle", "created_at", "updated_at"};
-
+    /*inventario add<identificadorActivo;identificadorProducto;Detalle>
+    inventario add<1;2; productos>
+    inventario delete<1>
+    inventario modify<1;2; lacteos>
+    inventario list<>
+    inventario ver<1>
+   */
     @Override
     public void insertar(List<String> parametros, String email) {
         try {

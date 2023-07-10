@@ -19,6 +19,13 @@ public class NPago implements INegocio {
     public NPago() {
         dato = new DPago();
     }
+    /*pago add<identificadorServicio;numeroReferencia;nombre;monto;fecha:metodoPago>
+    pago add<1;4;Juan;41;tarjeta>
+    pago delete<2>
+    pago modify<1;4;Juliana;41;tarjeta>
+    pago list<>
+    pago ver<2>
+   */  
 
     @Override
     public void insertar(List<String> parametros, String email) {

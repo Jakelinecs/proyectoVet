@@ -23,7 +23,12 @@ public class NServicio implements INegocio {
     }
 
     public static final String[] headers = {"id", "responsable", "idpaciente", "idmedico", "fecha", "total", "created_at", "updated_at"};
-
+     /*servicio add<responsable;identificadorPaciente;identificadorMedico;fecha;total>
+    servicio add<1;4;2;2019-05-14;45>
+    servicio delete<2>
+    servicio modify<1;4;2;2023-05-14;45>
+    servicio list<>
+    servicio ver<2>*/
     @Override
     public void insertar(List<String> parametros, String email) {
         try {

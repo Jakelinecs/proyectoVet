@@ -23,7 +23,14 @@ public class NReceta implements INegocio {
     public NReceta() {
         dato = new DReceta();
     }
-
+       /*
+    receta add<identicadorAtencion;numeroRecetario;estado>
+    receta add<1;45;disponible>
+    receta delete<2>
+    receta modify<2;48,disponible>
+    receta list<>
+    receta ver<2>
+   */  
     @Override
     public void insertar(List<String> parametros, String email) {
 

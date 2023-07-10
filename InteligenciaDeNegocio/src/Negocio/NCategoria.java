@@ -26,7 +26,15 @@ public class NCategoria implements INegocio{
 
     public static final String[] headers={ 
              "id","nombre","descripcion","estado","created_at","updated_at"};
-    @Override
+      /*categoria add<identificador;nombre;descripcion;estado>
+    categoria add<1;leche;lacteos;disponible>
+    categoria delete<1>
+    categoria modify<1;leche;lacteos;agotado>
+    categoria list<>
+    categoria ver<1>
+   */  
+    
+     @Override
     public void insertar(List<String> parametros,String email) {
         try {
 

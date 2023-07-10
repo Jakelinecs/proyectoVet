@@ -25,7 +25,13 @@ public class NProducto implements INegocio{
     public static final String[] headers={ 
              "id","idcategoria","codigo","nombre","precio_venta","stock",
         "descripcion","estado","created_at","updated_at"};
-
+       /*producto add<identificador;identificadorCategoria;codigo;nombre;precio;stock;descripcion;estado>
+    producto add<1;2;4563;leche;10;2;leche gloria,disponible>
+    producto delete<1>
+    producto modify<1;2;4563;leche;10;2;leche gloria,disponible>
+    producto list<>
+    producto ver<1>
+   */  
     @Override
     public void insertar(List<String> parametros,String email) {
         try {

@@ -23,7 +23,13 @@ public class NAtencionClinica implements INegocio {
     }
 
     public static final String[] headers = {"id", "idservicio", "tipo_servicio", "nro_servicio", "costo", "created_at", "updated_at"};
-
+     /*atencionClinica add<identificadorDetalleServicio;motivo;hora>
+    atencionClinica add<1;4;fiebre;10:00>
+    atencionClinica delete<1>
+    atencionClinica modify<1;4;rabia;10:00>
+    atencionClinica list<>
+    atencionClinica ver<1>
+   */  
     @Override
     public void insertar(List<String> parametros, String email) {
         try {
