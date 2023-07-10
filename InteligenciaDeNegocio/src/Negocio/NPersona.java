@@ -20,7 +20,16 @@ public class NPersona implements INegocio{
         dato= new DPersona();
     }
     
-
+    //persona add<identificador;nombre;apellidopaterno y materno;sexo;fecha de nacimiento ;celunar;direccion>
+    //persona add<5;daniel;taquichiri soraide;Hombre;21-08-12;78654123;ichilo santa fe>
+    
+    //persona add<identificador;nombre;apellidopaterno y materno;sexo;fecha de nacimiento ;celunar;direccion>
+    
+    //persona delete<identificador>
+    //persona delete<5>
+    //persona list<>
+    //persona ver<5>
+    
     @Override
     public void insertar(List<String> parametros,String email) {
         try {
@@ -44,6 +53,7 @@ public class NPersona implements INegocio{
         }
     }
 
+    //persona modify<5;daniel;taquichiri soraide;Hombre;21-08-12;78654123;ichilo santa fe>
     @Override
     public void editar(List<String> parametros,String email) {
         try {

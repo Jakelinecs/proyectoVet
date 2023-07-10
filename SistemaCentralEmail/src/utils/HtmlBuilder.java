@@ -26,7 +26,7 @@ public class HtmlBuilder {
         for (String[] element : data) {
             table_body_html += "<tr style= \"border: 1px solid back;\">";
             for (String value : element) {
-            table_body_html += "<td style= \"border: 1px solid back;\">";
+            table_body_html += "<td style= \"border: 1px solid back;\">" +value + "</td>";
             }
             table_body_html+="</tr>";
         }
@@ -47,26 +47,28 @@ public class HtmlBuilder {
     public static String generateText(String[] args) {
         String acumulative = "<center><h2>"+ args[0]+ "</h2></center>";
         for (int i = 1; i < args.length; i++) {
-            acumulative += "<center><h3>"+ args[i]+"</h3></center>";
+            acumulative += "<center><h3>"+ args[i].toString() +"</h3></center>";
         }
         return insertInHtml(acumulative);
     }
 
     public static String generateTableForSimpleData(String title, String[] headers, String[] data) {
         String acumulative = "";
-        for (int i=0 ; i <headers.length ; i++) {
+        for (var i=0 ; i < headers.length ; i++) {
+            
             acumulative+=
                     "<tr>"+
-                        "<td>" + headers[i] + "</td>" +
-                        "<td>" + data[i] + "</td>" +
+                        "<td>" + headers[i].toString() + "</td>" +
+                        "<td>" + data[i].toString()  + "</td>" +
                     "</tr>";
         }
         String table = 
                 "<div align=\"center\">\n"+
-                    "<h2>"+ title +"<>br\n"+
+                    "<h2>"+ title +"<br>\n"+
                     "<h2>\n"+
                 "</div>\n"+
                 "<table>\n"+
+                acumulative+
                 "</table>\n";
         return table;
      }

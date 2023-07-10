@@ -88,7 +88,7 @@ public class Token {
     
     public static final String lexeme_Add = "add";
     public static final String lexeme_Delete = "delete";
-    public static final String lexeme_Modify = "medify";
+    public static final String lexeme_Modify = "modify";
     public static final String lexeme_Get = "get";
     public static final String lexeme_Verify = "verify";
     public static final String lexeme_Cancel = "cancel";
