@@ -48,16 +48,32 @@ public class InteligenciaDeNegocio {
          */
 //        NProducto negocio = new NProducto();
         //   NUsers negocio = new NUsers();
-        INegocio negocio = new NBitacora();
-
+        NAyuda negocio = new NAyuda();
+  /*activo add<nombre;detalle;fechaAdquiscion;fechaMantenimiento;estado>
+    activo add<silla;roble;2019-05-09;2020-01-06;reservado>
+    activo delete<>
+    activo modify<silla;palo maria;2019-05-09;2020-01-06;reservado>
+    activo list<>
+    activo ver<1>
+   */ 
+ /*atencionClinica add<identificadorDetalleServicio;motivo;hora>
+    atencionClinica add<1;4;fiebre;10:00>
+    atencionClinica delete<1>
+    atencionClinica modify<1;4;rabia;10:00>
+    atencionClinica list<>
+    atencionClinica ver<1>
+   */  
         List<String> data = new ArrayList<>();
-        List<String[]> lista = negocio.listar(email);
+        data.add("activo ver<id>");
+        data.add("muestra un activo");
+        data.add("activo ver<1>");
+        
+        negocio.insertar(data);
+        List<String[]> lista = negocio.listar();
         for (String[] dato : lista) {
             System.out.println(Arrays.toString(dato));
         }
         System.out.println("---------------------");
-        String[] l = negocio.ver(data, email);
-        System.out.println(Arrays.toString(l));
 
     }
 

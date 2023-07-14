@@ -77,7 +77,7 @@ public class DPersona {
     
     
     
-    public void insertar() throws SQLException, ParseException{
+    public void insertar() throws SQLException{
         int usId;
         usId = us.getIdByEmail(correo);
         if (usId!= -1) {

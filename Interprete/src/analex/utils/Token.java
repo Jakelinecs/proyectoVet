@@ -45,6 +45,7 @@ public class Token {
     public static final int report = 206;
     public static final int list = 207;
     public static final int ver = 208;
+    public static final int help = 209;
 
     //identificadores de errores
     public static final int error_Command = 300;
@@ -95,6 +96,7 @@ public class Token {
     public static final String lexeme_Report = "report";
     public static final String lexeme_list = "list";
     public static final String lexeme_ver = "ver";
+    public static final String lexeme_help = "help";
 
     public static final String lexeme_Error_Command = "UNKNOWN COMMAND";
     public static final String lexeme_Error_Character = "UNKNOWN CHARACTER";
@@ -250,6 +252,9 @@ public String getStringToken(int token) {
         case ver:
             lexeme = lexeme_ver;
             break;
+        case help:
+            lexeme = lexeme_help;
+            break;
         case error_Command:
             lexeme = lexeme_Error_Command;
             break;
@@ -333,6 +338,8 @@ public String getStringToken(int token) {
                 return  ver;
             case lexeme_list:
                 return list;
+            case lexeme_help:
+                return help;
 
 
 

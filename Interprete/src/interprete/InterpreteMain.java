@@ -27,10 +27,10 @@ public class InterpreteMain {
     public static void main(String[] args) {
         // TODO code application logic here
         //String comando = "paciente_add(Firulay,canina,salchicha,macho,megro,12-05-2020,1,null)";
-        String comando = "persona list ";
+        String comando = "atencion list<> ";
         String correo = "jakeli1997.jcs@gmail.com";
-        NPersona bi = new NPersona();
-        INegocio bitacora = new NBitacora();
+//        NPersona bi = new NPersona();
+//        INegocio bitacora = new NBitacora();
         Interpreter interprete = new Interpreter(comando, correo);
 
         interprete.setListener(new ItokenEvenListener() {
@@ -46,32 +46,39 @@ public class InterpreteMain {
                 System.out.println(event);
                 switch (event.getAction()) {
                     case Token.add:
-                        bi.insertar(event.getParams(), event.getSender());
+                  //      bi.insertar(event.getParams(), event.getSender());
                         break;
                     case Token.modify:
-                        bi.editar(event.getParams(), event.getSender());
+                   // bi.editar(event.getParams(), event.getSender());
                         break;
                     case Token.delete:
-                        bi.eliminar(event.getParams(), event.getSender());
+                    //    bi.eliminar(event.getParams(), event.getSender());
                         break;
                     case Token.list:
                         System.out.println("Listar");
-                        List<String[]> lista = bi.listar(event.getSender());
-                        for (String[] dato : lista) {
-                            System.out.println(Arrays.toString(dato));
-                        }
+                     //   List<String[]> lista = bi.listar(event.getSender());
+//                        for (String[] dato : lista) {
+//                            System.out.println(Arrays.toString(dato));
+//                        }
                         break;
                     case Token.ver:
-                        String[] x = bi.ver(event.getParams(), event.getSender());
-                        System.out.println("Ver");
-                        System.out.println(Arrays.toString(x));
+//                        String[] x = bi.ver(event.getParams(), event.getSender());
+//                        System.out.println("Ver");
+//                        System.out.println(Arrays.toString(x));
+                        break;
+                    case Token.help:
+                        System.out.println("ayuda");
+//                        String[] x = bi.ver(event.getParams(), event.getSender());
+//                        System.out.println("Ver");
+//                        System.out.println(Arrays.toString(x));
                         break;
                     default:
-                        System.out.println("Acción inválida en el caso de uso");
+                        System.out.println("Acción inválida en el caso de uso \n persione : persona help \n "
+                            + "para ver todas las acciones del caso de uso");
                 }
-                List<String> a = new ArrayList<>();
-                a.add(comando);
-                bitacora.insertar( a, event.getSender());
+//                List<String> a = new ArrayList<>();
+//                a.add(comando);
+//                bitacora.insertar( a, event.getSender());
             }
 
             @Override
@@ -143,6 +150,7 @@ public class InterpreteMain {
             @Override
             public void error(TokenEvent event) {
                 System.out.println("CU: error");
+                System.out.println("Comando: "+event.getParams(0)+"\n No reconocido Intente: \n ayuda list  \n para listar todos los comandos");
                 System.out.println(event);
             }
 

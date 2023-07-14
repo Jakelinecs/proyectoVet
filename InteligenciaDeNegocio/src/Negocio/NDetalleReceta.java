@@ -44,9 +44,7 @@ public class NDetalleReceta implements INegocio {
                 dato.insertar();
             } catch (SQLException ex) {
                 java.util.logging.Logger.getLogger(NDetalleReceta.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-             java.util.logging.Logger.getLogger(NDetalleReceta.class.getName()).log(Level.SEVERE, null, ex);
-         }
+            }
             
     
         

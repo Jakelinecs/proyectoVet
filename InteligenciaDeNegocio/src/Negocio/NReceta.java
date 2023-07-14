@@ -38,13 +38,9 @@ public class NReceta implements INegocio {
             dato.setIdatencion(Integer.valueOf(parametros.get(0)));
             dato.setNumeroRecetario(Integer.valueOf(parametros.get(1)));
             dato.setEstado(parametros.get(2));
-
             dato.setCorreo(email);
-
             dato.insertar();
         } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
             java.util.logging.Logger.getLogger(NReceta.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -107,6 +103,7 @@ public class NReceta implements INegocio {
 
         return d;
     }
+    
     @Override
     public String[]  headers() {
         return dato.headers;

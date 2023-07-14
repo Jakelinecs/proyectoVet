@@ -49,6 +49,7 @@ public abstract class SistemaMail implements IEmailEventListener {
     public NPago bPago = new NPago();
     public NReceta bReceta = new NReceta();
     public NDetalleReceta bDetalle_receta = new NDetalleReceta();
+    public NAyuda bAyuda = new NAyuda();
     //public NAyuda NAyuda = new NAyuda();
 
     String comando;
@@ -96,6 +97,12 @@ public abstract class SistemaMail implements IEmailEventListener {
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
                             break;
+                        case Token.help:
+                            List<String> a = new ArrayList<>();
+                            a.add("usuario");
+                            List<String[]> lista1 = bAyuda.listar(a);
+                            tableNotifySuccess(event.getSender(), "Lista de Ayuda para Cu Usuario", bAyuda.headers() , (ArrayList<String[]>) lista1);
+                            break;
                         default:
                             System.out.println("Acción inválida en el caso de uso");
                     }
@@ -138,7 +145,14 @@ public abstract class SistemaMail implements IEmailEventListener {
                             System.out.println(Arrays.toString(x));
                             simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Personas", bPersona.headers() , x);
                             break;
+                        case Token.help:
+                            List<String> a = new ArrayList<>();
+                            a.add("persona");
+                            List<String[]> lista1 = bAyuda.listar(a);
+                            tableNotifySuccess(event.getSender(), "Lista de Ayuda para Cu Usuario", bAyuda.headers() , (ArrayList<String[]>) lista1);
+                            break;
                         default:
+                            simpleNotifySuccess(event.getSender(), "Acción inválida en el caso de uso <br> para mas detalles ejecuta: persona help ");
                             System.out.println("Acción inválida en el caso de uso");
                     }
                     List<String> a = new ArrayList<>();
@@ -602,6 +616,9 @@ public abstract class SistemaMail implements IEmailEventListener {
                 @Override
                 public void error(TokenEvent event) {
                     System.out.println("CU: error");
+                    simpleNotifySuccess(event.getSender(), "Comando: "
+                            +event.getParams(0)+"\n No reconocido Intente: \n"
+                                    + " ayuda list  \n para listar todos los comandos");
                     System.out.println(event);
                 }
 

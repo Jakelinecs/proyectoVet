@@ -48,7 +48,7 @@ public class TSParams {
 
     public String getStr(int index) {
         if (!posValida(index)) {
-            System.err.println("TSS.getStr : Posicion invalida.");
+            System.err.println("la Class TSParams en el metodo TSS.getStr : Posicion invalida.");
             return "";
         }
         return L.get(index);

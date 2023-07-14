@@ -24,7 +24,7 @@ public class NActivo implements INegocio {
     }
 
     public static final String[] headers = {"id", "nombre", "detalle", "f_adquisicion", "f_mantenimiento", "estado", "created_at", "updated_at"};
-       /*activo add<nombre;detalle;fechaAdquiscion;fechaMantenimiento;estado>
+    /*activo add<nombre;detalle;fechaAdquiscion;fechaMantenimiento;estado>
     activo add<silla;roble;2019-05-09;2020-01-06;reservado>
     activo delete<>
     activo modify<silla;palo maria;2019-05-09;2020-01-06;reservado>

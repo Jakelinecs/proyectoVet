@@ -37,8 +37,6 @@ public class NBitacora implements INegocio{
             dato.desconectar();
         } catch (SQLException ex) {
             Logger.getLogger(NPaciente.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(NBitacora.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

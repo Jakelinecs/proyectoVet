@@ -58,7 +58,7 @@ public class DReceta {
         this.idatencion = idatencion;
     }
 
-    public void insertar() throws SQLException, ParseException {
+    public void insertar() throws SQLException {
 
         int dato;
         dato = us.getIdByEmail(correo);//compara si existe

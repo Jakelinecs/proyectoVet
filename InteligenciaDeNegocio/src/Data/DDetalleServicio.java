@@ -97,7 +97,7 @@ public class DDetalleServicio {
             ps.setDate(6, new java.sql.Date(getDate(updated_at).getTime()));
 
             if (ps.executeUpdate() == 0) {
-                System.err.println("Ocurrió un error al insertar el detalle de servicio.");
+                System.err.println("DDetalleServicio: informa que Ocurrió un error al insertar el detalle de servicio.");
                 throw new SQLException();
             }
         }

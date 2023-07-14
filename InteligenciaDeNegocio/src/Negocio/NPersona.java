@@ -48,8 +48,6 @@ public class NPersona implements INegocio{
             dato.desconectar();
         } catch (SQLException ex) {
             Logger.getLogger(NPersona.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(NPersona.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

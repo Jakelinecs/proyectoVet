@@ -70,7 +70,7 @@ public class DBitacora {
     
     
     
-    public void insertar() throws SQLException, ParseException{
+    public void insertar() throws SQLException {
         int usId = 1;
         usId = us.getIdByEmail(correo);
         if (usId!= -1) {
