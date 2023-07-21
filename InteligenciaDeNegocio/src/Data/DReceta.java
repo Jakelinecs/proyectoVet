@@ -60,9 +60,10 @@ public class DReceta {
 
     public void insertar() throws SQLException {
 
-        int dato;
-        dato = us.getIdByEmail(correo);//compara si existe
-        if (dato != -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql = "INSERT INTO recetas(idatencion, numero_recetario, estado)"
                     + "VALUES (?, ?, ?)";
             PreparedStatement ps = conn.conectar().prepareStatement(sql);
@@ -79,9 +80,10 @@ public class DReceta {
     }
 
     public void editar() throws SQLException {
-        int dato;
-        dato = us.getIdByEmail(correo);
-        if (dato != -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql = "UPDATE recetas SET idatencion=?, numero_recetario=?, estado=?"
                     + "WHERE id=?";
             PreparedStatement ps = conn.conectar().prepareStatement(sql);
@@ -98,9 +100,10 @@ public class DReceta {
     }
 
     public void eliminar() throws SQLException {
-        int dato;
-        dato = us.getIdByEmail(correo);
-        if (dato != -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql = "delete from recetas where" + "id=?";
             PreparedStatement pr = new ClientPsql().conectar().prepareStatement(sql);
             pr.setInt(1, id);
@@ -114,9 +117,10 @@ public class DReceta {
 
     public List<String[]> listar() throws SQLException {
         List<String[]> lista = new ArrayList<>();
-        int dato;
-        dato = us.getIdByEmail(correo);
-        if (dato != -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql = "select *from recetas";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
             ResultSet set = ps.executeQuery();
@@ -135,9 +139,10 @@ public class DReceta {
 
     public String[] ver() throws SQLException {
         String[] usuario = null;
-        int dato;
-        dato = us.getIdByEmail(correo);
-        if (dato != -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql = "select * from recetas WHERE id=?";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
             ps.setInt(1, id);
@@ -157,6 +162,11 @@ public class DReceta {
 
         }
         return usuario;
+    }
+    public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
+        }
     }
 
 }

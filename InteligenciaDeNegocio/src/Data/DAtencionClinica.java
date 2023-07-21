@@ -54,9 +54,9 @@ public class DAtencionClinica {
     }
 
     public void insertar() throws SQLException {
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        if (usId != -1) {
             String sql = "INSERT INTO atencion_clinica(id, iddetalle_servicio, motivo, hr)" +
                     "VALUES(?, ?, ?, ?)";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
@@ -65,6 +65,7 @@ public class DAtencionClinica {
             ps.setString(3, motivo);
             ps.setString(4, hr);
 
+        us.desconectar();
             if (ps.executeUpdate() == 0) {
                 System.err.println("Class DAtencionClinica.java dice: Ocurrió un error al insertar AtencionClinica insertar()");
                 throw new SQLException();
@@ -73,9 +74,9 @@ public class DAtencionClinica {
     }
 
     public void editar() throws SQLException {
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        if (usId != -1) {
             String sql = "UPDATE atencion_clinica SET iddetalle_servicio=?, motivo=?, hr=?" +
                     "WHERE id=?";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
@@ -83,6 +84,7 @@ public class DAtencionClinica {
             ps.setString(2, motivo);
             ps.setString(3, hr);
             ps.setInt(4, id);
+        us.desconectar();
 
             if (ps.executeUpdate() == 0) {
                 System.err.println("Class DAtencionClinica.java dice: Ocurrió un error al editar atencion clinica editar()");
@@ -144,9 +146,16 @@ public class DAtencionClinica {
 
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
         }
     }
+    
+        public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
+        }
+    }
+
 }
 
 

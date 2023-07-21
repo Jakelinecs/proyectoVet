@@ -112,9 +112,6 @@ public class DUsers {
         }
         return lista;
     }
-
-    
-    
     
     public String[] ver() throws SQLException{
         String[] usuario=null;
@@ -184,7 +181,7 @@ public class DUsers {
 
         if(set.next()){
             i= set.getInt("id");
-
+            ps.close();
         }else{
             System.err.println("Class DUsers.java dice: "
             +"Ocurrio un error al buscar el id usuario getIdByEmail()");
@@ -265,7 +262,7 @@ public class DUsers {
 
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
         }
     }
     

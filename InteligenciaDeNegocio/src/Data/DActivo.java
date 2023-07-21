@@ -94,6 +94,7 @@ public class DActivo {
     // Métodos para insertar, editar, eliminar, listar y ver los activos
 
     public void insertar() throws SQLException {
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
         if (usId != -1) {
             String sql = "INSERT INTO activos (nombre, detalle, f_adquisicion, f_mantenimiento, estado, created_at, updated_at) " +
@@ -107,6 +108,7 @@ public class DActivo {
             ps.setDate(6, new java.sql.Date(getDate(created_at).getTime()));
             ps.setDate(7, new java.sql.Date(getDate(updated_at).getTime()));
 
+        us.desconectar();
             if (ps.executeUpdate() == 0) {
                 System.err.println("Ocurrió un error al insertar el activo.");
                 throw new SQLException();
@@ -115,6 +117,7 @@ public class DActivo {
     }
 
     public void editar() throws SQLException {
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
         if (usId != -1) {
             String sql = "UPDATE activos SET nombre = ?, detalle = ?, f_adquisicion = ?, f_mantenimiento = ?, estado = ?, updated_at = ? " +
@@ -128,6 +131,7 @@ public class DActivo {
             ps.setDate(6, new java.sql.Date(getDate(updated_at).getTime()));
             ps.setInt(7, id);
 
+        us.desconectar();
             if (ps.executeUpdate() == 0) {
                 System.err.println("Ocurrió un error al editar el activo.");
                 throw new SQLException();
@@ -136,12 +140,14 @@ public class DActivo {
     }
 
     public void eliminar() throws SQLException {
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
         if (usId != -1) {
             String sql = "DELETE FROM activos WHERE id = ?";
             PreparedStatement ps = conn.conectar().prepareStatement(sql);
             ps.setInt(1, id);
 
+        us.desconectar();
             if (ps.executeUpdate() == 0) {
                 System.err.println("Ocurrió un error al eliminar el activo.");
                 throw new SQLException();
@@ -151,6 +157,7 @@ public class DActivo {
 
     public List<String[]> listar() throws SQLException {
         List<String[]> lista = new ArrayList<>();
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
         if (usId != -1) {
             String sql = "SELECT * FROM activos";
@@ -191,6 +198,8 @@ public class DActivo {
                     String.valueOf(set.getDate("created_at")),
                     String.valueOf(set.getDate("updated_at"))
             };
+                    us.desconectar();
+
         } else {
             System.err.println("No se encontró el activo con el ID especificado.");
             throw new SQLException();
@@ -199,7 +208,7 @@ public class DActivo {
     }
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
         }
     }
     
@@ -220,5 +229,10 @@ public class DActivo {
         System.out.println(dateSQL.toString());
     return dateSQL;
     }
-    
+        public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
+        }
+    }
+
 }

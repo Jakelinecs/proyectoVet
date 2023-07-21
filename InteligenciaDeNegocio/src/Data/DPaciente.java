@@ -89,9 +89,10 @@ public class DPaciente {
     
     
     public void insertar() throws SQLException{
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql="INSERT INTO pacientes(id,nombre,especie,raza,sexo,color,f_nacimiento,propietario,perfil,created_at,updated_at)"+
                     " Values(?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
@@ -116,10 +117,10 @@ public class DPaciente {
     }
     
     public void editar() throws SQLException{
-        
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql="UPDATE pacientes SET nombre=?, especie=?, raza=?, sexo=?, color=?, "
                 + "f_nacimiento=?, propietario=?, updated_at=? "+
                 " WHERE id=?";
@@ -144,9 +145,10 @@ public class DPaciente {
     }
     
     public void eliminar() throws SQLException{
-                int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
 
             String sql="DELETE FROM pacientes WHERE"+
                     " id=?";
@@ -163,9 +165,10 @@ public class DPaciente {
 
     public List<String[]> listar() throws SQLException{
         List<String[]> lista= new ArrayList<>();
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql="SELECT * FROM pacientes";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
             ResultSet set= ps.executeQuery();
@@ -239,8 +242,13 @@ public class DPaciente {
     
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
         }
     }
-    
+        public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
+        }
+    }
+
 }

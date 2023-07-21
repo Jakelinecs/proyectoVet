@@ -148,7 +148,7 @@ public class DAyuda {
 
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
         }
     }
 
@@ -183,6 +183,12 @@ public class DAyuda {
                 set.getString("ejemplo"),});
         }
         return lista;
+    }
+
+        public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
+        }
     }
 
 }

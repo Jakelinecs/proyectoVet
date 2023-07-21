@@ -166,6 +166,11 @@ public class InterpreteMain {
                 System.out.println(event);
             }
 
+            @Override
+            public void activo(TokenEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
         });
 
         Thread thread = new Thread(interprete);

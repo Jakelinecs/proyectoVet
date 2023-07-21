@@ -1,5 +1,13 @@
 package coneccionsocket;
 
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import coneccionsocket.Utils.ConstGlobal;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +15,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  * @author angel
@@ -47,19 +64,37 @@ public class ClientPsql {
         } catch (SQLException e ) {
             System.err.println(" Class ClientePsql dice: Ocurrio un error al momento de conectar()");
         }
+        ejecutarDespuesDe6Segundos();
         return con;
     }
-
-    public void closeConection(){
+    
+    public void closeConnection() {
         try {
             if (con != null) {
                 con.close();
             }
-            
-        } catch (SQLException e ) {
-            System.err.println(" Class ClientePsql dice: Ocurrio un error al momento de closeConection()");
+        } catch (SQLException e) {
+            System.err.println("Class ClientePsql dice: Ocurrio un error al momento de closeConection()");
         }
     }
+
+    public void ejecutarDespuesDe6Segundos() {
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                Thread.sleep(6000);
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                // Código a ejecutar después de 6 segundos
+                closeConnection();
+            }
+        };
+        worker.execute();
+    }
+
     private String sql(String token) {
         String to = "'%" + token + "%'";
         return "SELECT * FROM PERSONA WHERE (per_nom like " + to + " or per_appm like " + to + " )";

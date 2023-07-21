@@ -84,7 +84,9 @@ public class DDetalleServicio {
     // Métodos para insertar, editar, eliminar, listar y ver los detalles de servicios
 
     public void insertar() throws SQLException {
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "INSERT INTO detalle_servicios (idservicio, tipo_servicio, nro_servicio, costo, created_at, updated_at) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
@@ -104,7 +106,9 @@ public class DDetalleServicio {
     }
 
     public void editar() throws SQLException {
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "UPDATE detalle_servicios SET idservicio = ?, tipo_servicio = ?, nro_servicio = ?, costo = ?, updated_at = ? " +
                     "WHERE id = ?";
@@ -124,7 +128,9 @@ public class DDetalleServicio {
     }
 
     public void eliminar() throws SQLException {
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "DELETE FROM detalle_servicios WHERE id = ?";
             PreparedStatement ps = conn.conectar().prepareStatement(sql);
@@ -139,7 +145,9 @@ public class DDetalleServicio {
 
     public List<String[]> listar() throws SQLException {
         List<String[]> lista = new ArrayList<>();
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "SELECT * FROM detalle_servicios";
             PreparedStatement ps = conn.conectar().prepareStatement(sql);
@@ -193,7 +201,13 @@ public class DDetalleServicio {
 
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
         }
     }
+    public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
+        }
+    }
+
 }

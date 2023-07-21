@@ -123,8 +123,9 @@ public class DContrato {
     }
 
     public void insertar() throws SQLException {
-        int usId;
-        usId = us.getIdByEmail(correo);
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "INSERT INTO contratos(id, detalle, f_ini, f_fin, idpersonal, iduser, estado, created_at, updated_at) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -147,8 +148,9 @@ public class DContrato {
     }
 
     public void editar() throws SQLException {
-        int usId;
-        usId = us.getIdByEmail(correo);
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "UPDATE contratos SET detalle = ?, f_ini = ?, f_fin = ?, idpersonal = ?, iduser = ?, estado = ?, " +
                     "updated_at = ? WHERE id = ?";
@@ -170,8 +172,9 @@ public class DContrato {
     }
 
     public void eliminar() throws SQLException {
-        int usId;
-        usId = us.getIdByEmail(correo);
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "DELETE FROM contratos WHERE id = ?";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
@@ -186,8 +189,9 @@ public class DContrato {
 
     public List<String[]> listar() throws SQLException {
         List<String[]> lista = new ArrayList<>();
-        int usId;
-        usId = us.getIdByEmail(correo);
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "SELECT * FROM contratos";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
@@ -239,7 +243,12 @@ public class DContrato {
 
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
+        }
+    }
+    public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
         }
     }
     

@@ -32,6 +32,7 @@ public class Token {
     public static final int receta = 112;
     public static final int detalle_receta = 113;
     public static final int ayuda = 114;
+    public static final int activo = 115;
     
     
     
@@ -69,18 +70,18 @@ public class Token {
     public static final String lexeme_User = "user";
     public static final String lexeme_Persona = "persona";
     public static final String lexeme_Paciente = "paciente";
-
+    public static final String lexeme_activo = "activo";
     public static final String lexeme_contrato = "contrato" ;
     public static final String lexeme_categoria = "categoria" ;
     public static final String lexeme_producto = "producto" ;
-    public static final String lexeme_tipo_servicio = "tipo_servicio" ;
+    public static final String lexeme_tipo_servicio = "tipoServicio" ;
     public static final String lexeme_servicio = "servicio" ;
-    public static final String lexeme_detalle_servicio = "detalle_servicio" ;
+    public static final String lexeme_detalle_servicio = "detalleServicio" ;
     public static final String lexeme_atencion = "atencion" ;
-    public static final String lexeme_detalle_atencion = "detalle_atencion" ;
+    public static final String lexeme_detalle_atencion = "detalleAtencion" ;
     public static final String lexeme_pago = "pago" ;
     public static final String lexeme_receta = "receta" ;
-    public static final String lexeme_detalle_receta = "detalle_receta" ;
+    public static final String lexeme_detalle_receta = "detalleReceta" ;
     public static final String lexeme_ayuda = "ayuda" ;
 
     

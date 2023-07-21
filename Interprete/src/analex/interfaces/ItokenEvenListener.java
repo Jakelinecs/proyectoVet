@@ -30,4 +30,5 @@ public interface ItokenEvenListener {
     void detallereceta(TokenEvent event);
     void error(TokenEvent event);
     void ayuda(TokenEvent event);
+    void activo(TokenEvent event);
 }

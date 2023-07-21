@@ -78,9 +78,10 @@ public class DPersona {
     
     
     public void insertar() throws SQLException{
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql="INSERT INTO personas(id,nombre,app_apm,sexo,f_nacimiento,celular,direccion,created_at,updated_at)"+
                     " Values(?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
@@ -104,9 +105,10 @@ public class DPersona {
     
     
     public void editar() throws SQLException{
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
 
             String sql="UPDATE personas SET nombre=?, app_apm=?, "
                     + "sexo=?, f_nacimiento=?, celular=?, "
@@ -131,9 +133,10 @@ public class DPersona {
     }
         
     public void eliminar() throws SQLException{
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql="DELETE FROM personas WHERE"+
                     " id=?";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
@@ -149,9 +152,10 @@ public class DPersona {
 
     public List<String[]> listar() throws SQLException{
         List<String[]> lista= new ArrayList<>();
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql="SELECT * FROM personas";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
             ResultSet set= ps.executeQuery();
@@ -175,9 +179,10 @@ public class DPersona {
     
     public String[] ver() throws SQLException{
         String[] usuario=null;
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql="SELECT * FROM personas WHERE id=?";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
             ps.setInt(1, id);
@@ -207,7 +212,7 @@ public class DPersona {
     
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
         }
     }
     
@@ -228,5 +233,10 @@ public class DPersona {
         System.out.println(dateSQL.toString());
     return dateSQL;
     }
-    
+        public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
+        }
+    }
+
 }

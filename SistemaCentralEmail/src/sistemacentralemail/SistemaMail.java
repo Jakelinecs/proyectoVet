@@ -34,6 +34,7 @@ public abstract class SistemaMail implements IEmailEventListener {
     private MailVerificationThread mailVerificationThread;
 
     private NPersona bPersona = new NPersona();
+    private NActivo bactivo = new NActivo();
     private INegocio bitacora = new NBitacora();
 
     public NUsers bUsuario = new NUsers();
@@ -185,13 +186,13 @@ public abstract class SistemaMail implements IEmailEventListener {
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
-                            tableNotifySuccess(event.getSender(), "Lista de Pacientes", bPersona.headers() , (ArrayList<String[]>) lista);
+                            tableNotifySuccess(event.getSender(), "Lista de Pacientes", bPaciente.headers() , (ArrayList<String[]>) lista);
                             break;
                         case Token.ver:
                             String[] x = bPaciente.ver(event.getParams(), event.getSender());
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
-                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Paciente", bPersona.headers() , x);
+                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Paciente", bPaciente.headers() , x);
                             break;
                         default:
                             System.out.println("Acción inválida en el caso de uso");
@@ -226,13 +227,13 @@ public abstract class SistemaMail implements IEmailEventListener {
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
-                            tableNotifySuccess(event.getSender(), "Lista de Contratos", bPersona.headers() , (ArrayList<String[]>) lista);
+                            tableNotifySuccess(event.getSender(), "Lista de Contratos", bContrato.headers() , (ArrayList<String[]>) lista);
                             break;
                         case Token.ver:
                             String[] x = bContrato.ver(event.getParams(), event.getSender());
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
-                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Contrato", bPersona.headers() , x);
+                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Contrato", bContrato.headers() , x);
                             break;
                         default:
                             System.out.println("Acción inválida en el caso de uso");
@@ -267,13 +268,13 @@ public abstract class SistemaMail implements IEmailEventListener {
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
-                            tableNotifySuccess(event.getSender(), "Lista de Categorias ", bPersona.headers() , (ArrayList<String[]>) lista);
+                            tableNotifySuccess(event.getSender(), "Lista de Categorias ", bCategoria.headers() , (ArrayList<String[]>) lista);
                             break;
                         case Token.ver:
                             String[] x = bCategoria.ver(event.getParams(), event.getSender());
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
-                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Categoria ", bPersona.headers() , x);
+                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Categoria ", bCategoria.headers() , x);
                             break;
                         default:
                             System.out.println("Acción inválida en el caso de uso");
@@ -308,13 +309,13 @@ public abstract class SistemaMail implements IEmailEventListener {
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
-                            tableNotifySuccess(event.getSender(), "Lista de Productos", bPersona.headers() , (ArrayList<String[]>) lista);
+                            tableNotifySuccess(event.getSender(), "Lista de Productos", bProducto.headers() , (ArrayList<String[]>) lista);
                             break;
                         case Token.ver:
                             String[] x = bProducto.ver(event.getParams(), event.getSender());
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
-                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Producto", bPersona.headers() , x);
+                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Producto", bProducto.headers() , x);
                             break;
                         default:
                             System.out.println("Acción inválida en el caso de uso");
@@ -349,13 +350,13 @@ public abstract class SistemaMail implements IEmailEventListener {
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
-                            tableNotifySuccess(event.getSender(), "Lista de Tipo de Servicios", bPersona.headers() , (ArrayList<String[]>) lista);
+                            tableNotifySuccess(event.getSender(), "Lista de Tipo de Servicios", bTipo_servicio.headers() , (ArrayList<String[]>) lista);
                             break;
                         case Token.ver:
                             String[] x = bTipo_servicio.ver(event.getParams(), event.getSender());
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
-                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Tipo de Servicio", bPersona.headers() , x);
+                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Tipo de Servicio", bTipo_servicio.headers() , x);
                             break;
                         default:
                             System.out.println("Acción inválida en el caso de uso");
@@ -390,13 +391,13 @@ public abstract class SistemaMail implements IEmailEventListener {
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
-                            tableNotifySuccess(event.getSender(), "Lista de Servicios", bPersona.headers() , (ArrayList<String[]>) lista);
+                            tableNotifySuccess(event.getSender(), "Lista de Servicios", bServicio.headers() , (ArrayList<String[]>) lista);
                             break;
                         case Token.ver:
                             String[] x = bServicio.ver(event.getParams(), event.getSender());
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
-                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Servicio", bPersona.headers() , x);
+                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Servicio", bServicio.headers() , x);
                             break;
                         default:
                             System.out.println("Acción inválida en el caso de uso");
@@ -431,13 +432,13 @@ public abstract class SistemaMail implements IEmailEventListener {
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
-                            tableNotifySuccess(event.getSender(), "Lista de Recetas", bPersona.headers() , (ArrayList<String[]>) lista);
+                            tableNotifySuccess(event.getSender(), "Lista de Recetas", bReceta.headers() , (ArrayList<String[]>) lista);
                             break;
                         case Token.ver:
                             String[] x = bReceta.ver(event.getParams(), event.getSender());
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
-                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Receta", bPersona.headers() , x);
+                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Receta", bReceta.headers() , x);
                             break;
                         default:
                             System.out.println("Acción inválida en el caso de uso");
@@ -472,13 +473,13 @@ public abstract class SistemaMail implements IEmailEventListener {
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
-                            tableNotifySuccess(event.getSender(), "Lista de Pagos", bPersona.headers() , (ArrayList<String[]>) lista);
+                            tableNotifySuccess(event.getSender(), "Lista de Pagos", bPago.headers() , (ArrayList<String[]>) lista);
                             break;
                         case Token.ver:
                             String[] x = bPago.ver(event.getParams(), event.getSender());
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
-                            simpleTableNotifySuccess(event.getSender(), "Ver Pago", bPersona.headers() , x);
+                            simpleTableNotifySuccess(event.getSender(), "Ver Pago", bPago.headers() , x);
                             break;
                         default:
                             System.out.println("Acción inválida en el caso de uso");
@@ -513,13 +514,13 @@ public abstract class SistemaMail implements IEmailEventListener {
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
-                            tableNotifySuccess(event.getSender(), "Lista de Detalle de Servicios", bPersona.headers() , (ArrayList<String[]>) lista);
+                            tableNotifySuccess(event.getSender(), "Lista de Detalle de Servicios", bDetalle_servicio.headers() , (ArrayList<String[]>) lista);
                             break;
                         case Token.ver:
                             String[] x = bDetalle_servicio.ver(event.getParams(), event.getSender());
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
-                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Servicio", bPersona.headers() , x);
+                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Servicio", bDetalle_servicio.headers() , x);
                             break;
                         default:
                             System.out.println("Acción inválida en el caso de uso");
@@ -554,13 +555,13 @@ public abstract class SistemaMail implements IEmailEventListener {
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
-                            tableNotifySuccess(event.getSender(), "Lista de Atencion Clinica", bPersona.headers() , (ArrayList<String[]>) lista);
+                            tableNotifySuccess(event.getSender(), "Lista de Atencion Clinica", bAtencion.headers() , (ArrayList<String[]>) lista);
                             break;
                         case Token.ver:
                             String[] x = bAtencion.ver(event.getParams(), event.getSender());
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
-                            simpleTableNotifySuccess(event.getSender(), "Ver Atencion Clinica", bPersona.headers() , x);
+                            simpleTableNotifySuccess(event.getSender(), "Ver Atencion Clinica", bAtencion.headers() , x);
                             break;
                         default:
                             System.out.println("Acción inválida en el caso de uso");
@@ -595,13 +596,13 @@ public abstract class SistemaMail implements IEmailEventListener {
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
-                            tableNotifySuccess(event.getSender(), "Lista de Detalle de la atencions", bPersona.headers() , (ArrayList<String[]>) lista);
+                            tableNotifySuccess(event.getSender(), "Lista de Detalle de la atencions", bDetalle_atencion.headers() , (ArrayList<String[]>) lista);
                             break;
                         case Token.ver:
                             String[] x = bDetalle_atencion.ver(event.getParams(), event.getSender());
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
-                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de la atencion", bPersona.headers() , x);
+                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de la atencion", bDetalle_atencion.headers() , x);
                             break;
                         default:
                             System.out.println("Acción inválida en el caso de uso");
@@ -618,7 +619,7 @@ public abstract class SistemaMail implements IEmailEventListener {
                     System.out.println("CU: error");
                     simpleNotifySuccess(event.getSender(), "Comando: "
                             +event.getParams(0)+"\n No reconocido Intente: \n"
-                                    + " ayuda list  \n para listar todos los comandos");
+                                    + " ayuda list<>  \n para listar todos los comandos");
                     System.out.println(event);
                 }
 
@@ -645,13 +646,13 @@ public abstract class SistemaMail implements IEmailEventListener {
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
-                            tableNotifySuccess(event.getSender(), "Lista de Detalle de Receta", bPersona.headers() , (ArrayList<String[]>) lista);
+                            tableNotifySuccess(event.getSender(), "Lista de Detalle de Receta", bDetalle_receta.headers() , (ArrayList<String[]>) lista);
                             break;
                         case Token.ver:
                             String[] x = bDetalle_receta.ver(event.getParams(), event.getSender());
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
-                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Detalle de Receta", bPersona.headers() , x);
+                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Detalle de Receta", bDetalle_receta.headers() , x);
                             break;
                         default:
                             System.out.println("Acción inválida en el caso de uso");
@@ -667,6 +668,74 @@ public abstract class SistemaMail implements IEmailEventListener {
                 public void ayuda(TokenEvent event) {
                     System.out.println("CU: ayuda");
                     System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.list:
+                            System.out.println("Listar");
+                            ArrayList<String[]> lista = (ArrayList<String[]>) bAyuda.listar();
+                            
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            tableNotifySuccess(event.getSender(), "Lista de Ayudas", bAyuda.headers() , lista);
+                            break;
+                        default:
+                            simpleNotifySuccess(event.getSender(), "Acción inválida en el caso de uso <br> para mas detalles ejecuta: activo list<> ");
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
+                }
+
+                @Override
+                public void activo(TokenEvent event) {
+                    System.out.println("CU: ayuda");
+                    System.out.println(event);
+                    switch (event.getAction()) {
+                        case Token.add:
+                            bactivo.insertar(event.getParams(), event.getSender());
+                            simpleNotifySuccess(event.getSender(), "Activo Registrada Corectamente");
+                            break;
+                        case Token.modify:
+                            bactivo.editar(event.getParams(), event.getSender());
+                            simpleNotifySuccess(event.getSender(), "Activo Actualizada Corectamente");
+                            break;
+                        case Token.delete:
+                            bactivo.eliminar(event.getParams(), event.getSender());
+                            simpleNotifySuccess(event.getSender(), "Activo Eliminada Corectamente");
+                            break;
+                        case Token.list:
+                            System.out.println("Listar");
+                            ArrayList<String[]> lista = (ArrayList<String[]>) bactivo.listar(event.getSender());
+                            
+                            for (String[] dato : lista) {
+                                System.out.println(Arrays.toString(dato));
+                            }
+                            tableNotifySuccess(event.getSender(), "Lista de Activo ", bactivo.headers() , lista);
+                            break;
+                        case Token.ver:
+                            String[] x = bactivo.ver(event.getParams(), event.getSender());
+                            System.out.println("Ver");
+                            System.out.println(Arrays.toString(x));
+                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Activo ", bactivo.headers() , x);
+                            break;
+                        case Token.help:
+                            List<String> a = new ArrayList<>();
+                            a.add("activo");
+                            List<String[]> lista1 = bAyuda.listar(a);
+                            tableNotifySuccess(event.getSender(), "Lista de Ayuda para Cu Activo ", bAyuda.headers() , (ArrayList<String[]>) lista1);
+                            break;
+                        default:
+                            simpleNotifySuccess(event.getSender(), "Acción inválida en el caso de uso <br> para mas detalles ejecuta: activo help <> ");
+                            System.out.println("Acción inválida en el caso de uso");
+                    }
+                    List<String> a = new ArrayList<>();
+                    a.add(comando);
+                    bitacora.insertar(a, event.getSender());
+                    dato = bitacora.ver(a, event.getSender());
+                    miMetodoAbstracto(dato);
                 }
 
             });
@@ -724,7 +793,7 @@ public abstract class SistemaMail implements IEmailEventListener {
                         HtmlBuilder.generateText(new String[]{
                     "Error al procesar la fecha",
                     "La fecha introducida posee un formato incorecto"
-                }));
+                     }));
                 break;
             case autorization_Error:
                 emailObject = new Email(email, Email.SUBJECT,

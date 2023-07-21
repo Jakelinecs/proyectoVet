@@ -87,9 +87,10 @@ public class DPago {
     }
 
     public void insertar() throws SQLException {
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql = "INSERT INTO pagos(id, idservicio, fecha, nombre, numero_referencia, monto, metodo_pago, descripcion, estado_pago)" +
                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
@@ -111,9 +112,10 @@ public class DPago {
     }
 
     public void editar() throws SQLException {
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql = "UPDATE pagos SET idservicio=?, fecha=?, nombre=?, numero_referencia=?, monto=?, metodo_pago=?, descripcion=?, estado_pago=?" +
                     "WHERE id=?";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
@@ -197,7 +199,7 @@ public class DPago {
 
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
         }
     }
 
@@ -207,4 +209,10 @@ public class DPago {
         java.sql.Date dateSQL = new java.sql.Date(x);
         return dateSQL;
     }
+        public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
+        }
+    }
+
 }

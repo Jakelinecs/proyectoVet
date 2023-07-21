@@ -71,9 +71,6 @@ public class DBitacora {
     
     
     public void insertar() throws SQLException {
-        int usId = 1;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
             String sql="INSERT INTO bitacora_email(comando,correo,fecha_hr)"+
                     " Values(?,?,?)";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
@@ -86,14 +83,14 @@ public class DBitacora {
                 +"Ocurrio un error al insertar Bitacora insertar()");
                 throw new SQLException();
             } 
-        }
     }
     
     
     public void editar() throws SQLException{
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
 
             String sql="UPDATE bitacora_email SET comando=?, correo=?, "
                     + "fecha_hr=?"+
@@ -113,9 +110,10 @@ public class DBitacora {
     }
         
     public void eliminar() throws SQLException{
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql="DELETE FROM bitacora_email WHERE"+
                     " id=?";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
@@ -131,9 +129,6 @@ public class DBitacora {
 
     public List<String[]> listar() throws SQLException{
         List<String[]> lista= new ArrayList<>();
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
             String sql="SELECT * FROM bitacora_email";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
             ResultSet set= ps.executeQuery();
@@ -146,15 +141,11 @@ public class DBitacora {
                     set.getString("fecha_hr"),
                 });
             }
-        }
         return lista;
     }
     
     public String[] ver() throws SQLException{
         String[] usuario=null;
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
             String sql="SELECT * FROM bitacora_email ORDER BY fecha_hr DESC LIMIT 1;";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
             ResultSet set= ps.executeQuery();
@@ -172,13 +163,12 @@ public class DBitacora {
                 +"Ocurrio un error al ver Bitacora ver()");
                 throw new SQLException();
             } 
-        }
         return usuario;
     }
     
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
         }
     }
     
@@ -198,6 +188,11 @@ public class DBitacora {
       Date dateSQL =new Date(x);
         System.out.println(dateSQL.toString());
     return dateSQL;
+    }
+    public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
+        }
     }
     
 }

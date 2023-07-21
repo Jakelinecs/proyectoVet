@@ -24,15 +24,16 @@ public class NAtencionClinica implements INegocio {
 
     public static final String[] headers = {"id", "idservicio", "tipo_servicio", "nro_servicio", "costo", "created_at", "updated_at"};
      /*atencionClinica add<identificadorDetalleServicio;motivo;hora>
-    atencionClinica add<1;4;fiebre;10:00>
-    atencionClinica delete<1>
-    atencionClinica modify<1;4;rabia;10:00>
-    atencionClinica list<>
-    atencionClinica ver<1>
+    atencion add<1;4;fiebre;10:00>
+    atencion delete<1>
+    atencion modify<1;4;rabia;10:00>
+    atencion list<>
+    atencion ver<1>
    */  
     @Override
     public void insertar(List<String> parametros, String email) {
         try {
+            iniciarDato();
             dato.setIddetalleServicio(Integer.parseInt(parametros.get(0)));
             dato.setMotivo(parametros.get(1));
             dato.setHr(parametros.get(2));
@@ -48,6 +49,7 @@ public class NAtencionClinica implements INegocio {
     @Override
     public void editar(List<String> parametros, String email) {
         try {
+            iniciarDato();
             dato.setId(Integer.parseInt(parametros.get(0)));
             dato.setIddetalleServicio(Integer.parseInt(parametros.get(1)));
             dato.setMotivo(parametros.get(2));
@@ -64,6 +66,7 @@ public class NAtencionClinica implements INegocio {
     @Override
     public void eliminar(List<String> parametros, String email) {
         try {
+            iniciarDato();
             dato.setId(Integer.parseInt(parametros.get(0)));
             dato.setCorreo(email);
 
@@ -79,6 +82,7 @@ public class NAtencionClinica implements INegocio {
         List<String[]> lista = new ArrayList<>();
         dato.setCorreo(email);
         try {
+            iniciarDato();
             lista = dato.listar();
             dato.desconectar();
         } catch (SQLException ex) {
@@ -91,6 +95,7 @@ public class NAtencionClinica implements INegocio {
     public String[] ver(List<String> parametros, String email) {
         String[] d = null;
         try {
+            iniciarDato();
             dato.setCorreo(email);
             dato.setId(Integer.parseInt(parametros.get(0)));
 
@@ -106,5 +111,10 @@ public class NAtencionClinica implements INegocio {
     public String[]  headers() {
         return dato.headers;
     }
-
+    
+    public void iniciarDato(){
+        if(dato== null){
+            this.dato = new DAtencionClinica();
+        }
+    }
 }

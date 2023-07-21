@@ -34,6 +34,7 @@ public class NActivo implements INegocio {
     @Override
     public void insertar(List<String> parametros, String email) {
         try {
+            iniciarDato();
             dato.setNombre(parametros.get(0));
             dato.setDetalle(parametros.get(1));
             dato.setF_adquisicion(parametros.get(2));
@@ -53,6 +54,7 @@ public class NActivo implements INegocio {
     @Override
     public void editar(List<String> parametros, String email) {
         try {
+            iniciarDato();
             dato.setId(Integer.parseInt(parametros.get(0)));
             dato.setNombre(parametros.get(1));
             dato.setDetalle(parametros.get(2));
@@ -72,6 +74,7 @@ public class NActivo implements INegocio {
     @Override
     public void eliminar(List<String> parametros, String email) {
         try {
+            iniciarDato();
             dato.setId(Integer.parseInt(parametros.get(0)));
             dato.setCorreo(email);
 
@@ -87,6 +90,7 @@ public class NActivo implements INegocio {
         List<String[]> lista = new ArrayList<>();
         dato.setCorreo(email);
         try {
+            iniciarDato();
             lista = dato.listar();
             dato.desconectar();
         } catch (SQLException ex) {
@@ -114,4 +118,12 @@ public class NActivo implements INegocio {
     public String[]  headers() {
         return dato.headers;
     }
+    
+    
+        public void iniciarDato(){
+        if(dato== null){
+            this.dato = new DActivo();
+        }
+    }
+
 }

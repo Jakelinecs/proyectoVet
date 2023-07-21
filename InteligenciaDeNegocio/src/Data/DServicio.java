@@ -89,7 +89,9 @@ public class DServicio {
 
     // Métodos para insertar, editar, eliminar, listar y ver los servicios
 public void insertar() throws SQLException {
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "INSERT INTO servicios (responsable, idpaciente, idmedico, fecha, total, created_at, updated_at) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -110,7 +112,9 @@ public void insertar() throws SQLException {
     }
 
     public void editar() throws SQLException {
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "UPDATE servicios SET responsable = ?, idpaciente = ?, idmedico = ?, fecha = ?, total = ?, updated_at = ? " +
                     "WHERE id = ?";
@@ -131,7 +135,9 @@ public void insertar() throws SQLException {
     }
 
     public void eliminar() throws SQLException {
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "DELETE FROM servicios WHERE id = ?";
             PreparedStatement ps = conn.conectar().prepareStatement(sql);
@@ -146,7 +152,9 @@ public void insertar() throws SQLException {
 
     public List<String[]> listar() throws SQLException {
         List<String[]> lista = new ArrayList<>();
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "SELECT * FROM servicios";
             PreparedStatement ps = conn.conectar().prepareStatement(sql);
@@ -197,7 +205,7 @@ public void insertar() throws SQLException {
     
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
         }
     }
     
@@ -217,6 +225,11 @@ public void insertar() throws SQLException {
       Date dateSQL =new Date(x);
         System.out.println(dateSQL.toString());
     return dateSQL;
+    }
+    public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
+        }
     }
     
 }

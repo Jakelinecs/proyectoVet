@@ -89,9 +89,10 @@ public class DCategoria {
     
 
         public void insertar() throws SQLException{
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql="INSERT INTO cateogrias(id,nombre,descripcion,estado,created_at,updated_at)"+
                     " Values(?,?,?,?,?,?)";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
@@ -112,9 +113,10 @@ public class DCategoria {
     
     public void editar() throws SQLException{
         
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
 
             String sql="UPDATE cateogrias SET nombre=?, descripcion=?, estado=?, updated_at=? "+
                 " WHERE id=?";
@@ -135,9 +137,10 @@ public class DCategoria {
     }
     
     public void eliminar() throws SQLException{
-                int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
 
             String sql="DELETE FROM cateogrias WHERE"+
                     " id=?";
@@ -154,9 +157,10 @@ public class DCategoria {
 
     public List<String[]> listar() throws SQLException{
         List<String[]> lista= new ArrayList<>();
-        int usId;
-        usId = us.getIdByEmail(correo);
-        if (usId!= -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql="SELECT * FROM categorias";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
             ResultSet set= ps.executeQuery();
@@ -221,10 +225,15 @@ public class DCategoria {
     
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
         }
     }
     
+    public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
+        }
+    }
 
 }
 

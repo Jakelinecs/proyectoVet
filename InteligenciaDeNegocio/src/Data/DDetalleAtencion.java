@@ -59,11 +59,10 @@ public class DDetalleAtencion {
     }
 
     public void insertar() throws SQLException {
-
-        int dato;
-
-        dato = us.getIdByEmail(correo);//compara si existe
-        if (dato != -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql = "INSERT INTO detalle_atencions (id, idatencion, detalle_procedimiento, costo) "
                     + "VALUES (DEFAULT, ?, ?, ?)";
             PreparedStatement ps = conn.conectar().prepareStatement(sql);
@@ -80,9 +79,10 @@ public class DDetalleAtencion {
     }
 
     public void editar() throws SQLException {
-        int dato;
-        dato = us.getIdByEmail(correo);
-        if (dato != -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql = "UPDATE detalle_atencions SET idatencion=?, detalle_procedimiento=?, costo=? "
                     + "WHERE id=?";
             PreparedStatement ps = conn.conectar().prepareStatement(sql);
@@ -99,9 +99,10 @@ public class DDetalleAtencion {
     }
 
     public void eliminar() throws SQLException {
-        int dato;
-        dato = us.getIdByEmail(correo);
-        if (dato != -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql = "delete from detalle_atencions where " + "id=?";
             PreparedStatement pr = new ClientPsql().conectar().prepareStatement(sql);
             pr.setInt(1, id);
@@ -115,9 +116,10 @@ public class DDetalleAtencion {
 
     public List<String[]> listar() throws SQLException {
         List<String[]> lista = new ArrayList<>();
-        int dato;
-        dato = us.getIdByEmail(correo);
-        if (dato != -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
              String sql = "SELECT * FROM detalle_atencions";
         PreparedStatement ps = conn.conectar().prepareStatement(sql);
         ResultSet set = ps.executeQuery();
@@ -136,9 +138,10 @@ public class DDetalleAtencion {
 
     public String[] ver() throws SQLException {
         String[] usuario = null;
-        int dato;
-        dato = us.getIdByEmail(correo);
-        if (dato != -1) {
+        iniciarUser();
+        int usId = us.getIdByEmail(correo);
+        us.desconectar();
+        if (usId != -1) {
             String sql = "select * from detalle_atencions WHERE id=?";
             PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
             ps.setInt(1, id);
@@ -162,7 +165,13 @@ public class DDetalleAtencion {
 
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
         }
     }
+        public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
+        }
+    }
+
 }

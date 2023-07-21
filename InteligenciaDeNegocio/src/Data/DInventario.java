@@ -65,7 +65,9 @@ public class DInventario {
     // Métodos para insertar, editar, eliminar, listar y ver los elementos del inventario
 
     public void insertar() throws SQLException {
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "INSERT INTO inventarios (idactivo, idproducto, detalle, created_at, updated_at) " +
                     "VALUES (?, ?, ?, now(), now())";
@@ -82,7 +84,9 @@ public class DInventario {
     }
 
     public void editar() throws SQLException {
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "UPDATE inventarios SET idactivo = ?, idproducto = ?, detalle = ?, updated_at = now() " +
                     "WHERE id = ?";
@@ -100,7 +104,9 @@ public class DInventario {
     }
 
     public void eliminar() throws SQLException {
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "DELETE FROM inventarios WHERE id = ?";
             PreparedStatement ps = conn.conectar().prepareStatement(sql);
@@ -115,7 +121,9 @@ public class DInventario {
 
     public List<String[]> listar() throws SQLException {
         List<String[]> lista = new ArrayList<>();
+        iniciarUser();
         int usId = us.getIdByEmail(correo);
+        us.desconectar();
         if (usId != -1) {
             String sql = "SELECT * FROM inventarios";
             PreparedStatement ps = conn.conectar().prepareStatement(sql);
@@ -160,7 +168,13 @@ public class DInventario {
 
     public void desconectar() {
         if (conn != null) {
-            conn.closeConection();
+            conn.closeConnection();
         }
     }
+        public void iniciarUser(){
+        if(us== null){
+            this.us = new DUsers();
+        }
+    }
+
 }

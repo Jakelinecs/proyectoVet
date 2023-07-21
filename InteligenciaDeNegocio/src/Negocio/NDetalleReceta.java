@@ -25,11 +25,11 @@ public class NDetalleReceta implements INegocio {
         dato = new DDetalleReceta();
     }
        /*detalleReceta add<identificador;nombreProducto;indicaciones>
-    detalleReceta add<1;pencilina; tomar 1 vez al dia>
-    detalleReceta delete<1>
-    detalleReceta modify<1;doclofenaco; tomar 1 vez al dia>
-    detalleReceta list<>
-    detalleReceta ver<1>
+    detalle_receta add<1;pencilina; tomar 1 vez al dia>
+    detalle_receta delete<1>
+    detalle_receta modify<1;doclofenaco; tomar 1 vez al dia>
+    detalle_receta list<>
+    detalle_receta ver<1>
    */  
     public void insertar(List<String> parametros, String email) {
   
