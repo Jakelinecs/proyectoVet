@@ -91,12 +91,13 @@ public abstract class SistemaMail implements IEmailEventListener {
                             for (String[] dato : lista) {
                                 System.out.println(Arrays.toString(dato));
                             }
-                            tableNotifySuccess(event.getSender(), "Lista de Personas", bPersona.headers() , (ArrayList<String[]>) lista);
+                            tableNotifySuccess(event.getSender(), "Lista de Personas", bUsuario.headers() , (ArrayList<String[]>) lista);
                             break;
                         case Token.ver:
                             String[] x = bUsuario.ver(event.getParams(), event.getSender());
                             System.out.println("Ver");
                             System.out.println(Arrays.toString(x));
+                            simpleTableNotifySuccess(event.getSender(), "Ver Detalle de Usuario", bUsuario.headers() , x);
                             break;
                         case Token.help:
                             List<String> a = new ArrayList<>();
@@ -752,7 +753,7 @@ public abstract class SistemaMail implements IEmailEventListener {
         Email emailObject = null;
         switch (type) {
             case Token.error_Character:
-                emailObject = new Email(email, Email.SUBJECT,
+                emailObject = new Email(email, "grupo09sa@tecnoweb.org.bo", Email.SUBJECT,
                         HtmlBuilder.generateText(new String[]{
                     "Caracter desconocido",
                     "No se pudo ejecutar el comando [" + arg.get(0) + "] debido a: ",
@@ -760,7 +761,7 @@ public abstract class SistemaMail implements IEmailEventListener {
                 }));
                 break;
             case Token.error_Command:
-                emailObject = new Email(email, Email.SUBJECT,
+                emailObject = new Email(email, "grupo09sa@tecnoweb.org.bo", Email.SUBJECT,
                         HtmlBuilder.generateText(new String[]{
                     "Caracter desconocido",
                     "No se pudo ejecutar el comando [" + arg.get(0) + "] debido a: ",
@@ -768,28 +769,28 @@ public abstract class SistemaMail implements IEmailEventListener {
                 }));
                 break;
             case constant_Error:
-                emailObject = new Email(email, Email.SUBJECT,
+                emailObject = new Email(email, "grupo09sa@tecnoweb.org.bo", Email.SUBJECT,
                         HtmlBuilder.generateText(new String[]{
                     "Error al interactuar con la base de datos",
                     "Referencia a informacion inexistente"
                 }));
                 break;
             case numer_format_Error:
-                emailObject = new Email(email, Email.SUBJECT,
+                emailObject = new Email(email, "grupo09sa@tecnoweb.org.bo", Email.SUBJECT,
                         HtmlBuilder.generateText(new String[]{
                     "Error en el tipo de parametro",
                     "El tipo de uno de los parametros es incorrecto"
                 }));
                 break;
             case index_Out_Of_Bount_Error:
-                emailObject = new Email(email, Email.SUBJECT,
+                emailObject = new Email(email, "grupo09sa@tecnoweb.org.bo", Email.SUBJECT,
                         HtmlBuilder.generateText(new String[]{
                     "Cantidad en el tipo de parametro",
                     "El tipo de uno de los parametros es incorrecto"
                 }));
                 break;
             case parse_Error:
-                emailObject = new Email(email, Email.SUBJECT,
+                emailObject = new Email(email, "grupo09sa@tecnoweb.org.bo", Email.SUBJECT,
                         HtmlBuilder.generateText(new String[]{
                     "Error al procesar la fecha",
                     "La fecha introducida posee un formato incorecto"

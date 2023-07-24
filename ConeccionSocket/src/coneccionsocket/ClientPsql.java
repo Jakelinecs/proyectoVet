@@ -53,6 +53,14 @@ public class ClientPsql {
         this.user = ConstGlobal.USER_SERV;
             this.pass = ConstGlobal.PASS_SERV;
         this.dbName = ConstGlobal.DB_NAME;
+
+        /**
+        this.host = "127.0.0.1";
+        this.port = 5432;
+        this.user = "postgres";
+            this.pass = "123123";
+        this.dbName = "veterinaria";
+        */
     }
 
     public Connection conectar(){
@@ -82,7 +90,7 @@ public class ClientPsql {
         SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() throws Exception {
-                Thread.sleep(6000);
+                Thread.sleep(9000);
                 return null;
             }
 

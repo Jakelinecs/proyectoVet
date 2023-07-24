@@ -15,6 +15,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NUsers implements INegocio {
     private DUsers dato;
@@ -33,13 +35,13 @@ public class NUsers implements INegocio {
             dato.setId(Integer.parseInt(parametros.get(0)));
             dato.setName(parametros.get(1));
             dato.setEmail(parametros.get(2));
-            dato.setEmail_verified_at(parametros.get(3));
-            dato.setPassword(parametros.get(4));
-            dato.setEstilo(parametros.get(5));
-            dato.setFuente(parametros.get(6));
-            dato.setRemember_token(parametros.get(7));
-            dato.setCreated_at(parametros.get(8));
-            dato.setUpdated_at(parametros.get(9));
+            dato.setEmail_verified_at("");
+            dato.setPassword(parametros.get(3));
+            dato.setEstilo(parametros.get(4));
+            dato.setFuente("img/perfil/logo_v1.png");
+            dato.setRemember_token("");
+            dato.setCreated_at();
+            dato.setUpdated_at();
 
             dato.insertar();
             dato.desconectar();
@@ -54,13 +56,12 @@ public class NUsers implements INegocio {
             dato.setId(Integer.parseInt(parametros.get(0)));
             dato.setName(parametros.get(1));
             dato.setEmail(parametros.get(2));
-            dato.setEmail_verified_at(parametros.get(3));
-            dato.setPassword(parametros.get(4));
-            dato.setEstilo(parametros.get(5));
-            dato.setFuente(parametros.get(6));
-            dato.setRemember_token(parametros.get(7));
-            dato.setCreated_at(parametros.get(8));
-            dato.setUpdated_at(parametros.get(9));
+            dato.setEmail_verified_at(null);
+            dato.setPassword(parametros.get(3));
+            dato.setEstilo(parametros.get(4));
+            dato.setFuente("img/perfil/logo_v1.png");
+            dato.setRemember_token(null);
+            dato.setUpdated_at();
 
             dato.editar();
             dato.desconectar();
@@ -137,7 +138,16 @@ public class NUsers implements INegocio {
 
     @Override
     public String[] ver(List<String> parametros, String email) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String[] d = null;
+        try {
+            dato.setId(Integer.valueOf(parametros.get(0)));
+            
+            d = dato.ver();
+            dato.desconectar();
+        } catch (SQLException ex) {
+            Logger.getLogger(NPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return d;
     }
     
         @Override

@@ -36,8 +36,8 @@ public class Central extends javax.swing.JFrame{
     public Central() {
         initComponents();
         negocio = new NBitacora();
-        listar() ;
         
+        listar() ;
         SistemaMail app;
         app = new SistemaMail() {
             @Override
@@ -45,6 +45,7 @@ public class Central extends javax.swing.JFrame{
                 adicionar(dato);
             }
         };
+        
         app.start();
         
         

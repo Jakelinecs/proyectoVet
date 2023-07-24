@@ -5,9 +5,10 @@ public class Extractor {
     private static String HOTMAIL = "d=hotmail";
     private static String YAHOO = "d=yahoo";
     private static String OUTLOOK = "d=microsoft.com";
-    private static String FICCT_UAGRM = "d=ficct.uagrm.edu.bo";
+    private static String FICCT_UAGRM = "d=uagrm-edu-bo";
     private static String TECNO_WEB = "Received: from mail.tecnoweb.org.bo";
     private static String KREATIVADO = "d=kreativabo.com";
+
 
     public static Email getEmail(String plain_text) {
 //        System.out.println("-----------------------------------------------");
@@ -18,7 +19,7 @@ public class Extractor {
         String from = getFrom(plain_text);
         String to = getTo(plain_text);
         String subject = getSubject(plain_text);
-        String mesaje = getMensaje(plain_text);
+        String mesaje = "";
         
         
         return new Email(from, to, subject, mesaje);
@@ -43,14 +44,15 @@ public class Extractor {
             } else if (plain_text.contains(YAHOO)) {
                 end_string = "MIME-Version:";
             } else if (plain_text.contains(FICCT_UAGRM)) {
-                end_string = "From: ";
+                end_string = "To: ";
             } else if (plain_text.contains(TECNO_WEB)) {
                 end_string = "User-Agent: ";
             } else if (plain_text.contains(KREATIVADO)) {
                 end_string = "To: ";
             }
             int e = plain_text.indexOf(end_string, i);
-            return plain_text.substring(i, e).replace("\n", "");
+            String r = plain_text.substring(i, e).replace("\n", "");
+            return r;
         } catch (Exception exception) {
             if (plain_text.contains(FICCT_UAGRM)) {
                 i = plain_text.indexOf(search) + search.length();

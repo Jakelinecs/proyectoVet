@@ -3,10 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Data/DServicio.java</file>
-            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Negocio/NActivo.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Negocio/NPersona.java</file>
             <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/inteligenciadenegocio/InteligenciaDeNegocio.java</file>
-            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Negocio/NAtencionClinica.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Negocio/NUsers.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Data/DProducto.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Negocio/NProducto.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Negocio/NPaciente.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Utlis/DateString.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Data/DAyuda.java</file>
+            <file>file:/D:/tecnologia%20web/1-2023/proyecto/email/InteligenciaDeNegocio/src/Data/DPaciente.java</file>
         </group>
     </open-files>
 </project-private>

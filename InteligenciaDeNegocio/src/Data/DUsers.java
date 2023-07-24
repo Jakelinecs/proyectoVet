@@ -4,6 +4,7 @@
  */
 package Data;
 
+import Utlis.DateString;
 import coneccionsocket.ClientPsql;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,9 +13,11 @@ import java.sql.SQLException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
+import java.util.Calendar;
 /**
  *
  * @author HP
@@ -25,8 +28,8 @@ public class DUsers {
     int id;
     String name,email,email_verified_at,password,estilo,fuente,remember_token,created_at,updated_at;
     
-        public static final String[] headers = {"id", "name", "email", "email_verified_at", "password", "estilo",
-            "fuente", "remember_token", "created_at", "updated_at"};
+        public static final String[] headers = {"id", "name", "email", "password", "estilo",
+            "created_at", "updated_at"};
 
     
     
@@ -37,13 +40,13 @@ public class DUsers {
         ps.setInt(1, id);
         ps.setString(2, name);
         ps.setString(3, email);
-        ps.setString(4, email_verified_at);
+        ps.setTimestamp(4, null);
         ps.setString(5, password);
         ps.setString(6, estilo);
         ps.setString(7, fuente);
         ps.setString(8, remember_token);
-        ps.setString(9, created_at);
-        ps.setString(10, updated_at);
+        ps.setDate(9, getDateTime(created_at));
+        ps.setDate(10, getDateTime(updated_at));
         
         if(ps.executeUpdate()==0){
             System.err.println("Class DUsers.java dice: "
@@ -52,6 +55,14 @@ public class DUsers {
         } 
     }
     
+    public Date getDateTime(String date){
+        Calendar c = DateString.StringToDateTime(date);
+        long x = c.getTimeInMillis();
+          System.out.println(x);
+          Date dateSQL =new Date(x);
+            System.out.println(dateSQL.toString());
+        return dateSQL;
+    }
     
     public void editar() throws SQLException{
         String sql="UPDATE users SET name=?, email=?, email_verified_at=?, password=?, estilo=? "
@@ -101,11 +112,8 @@ public class DUsers {
                 String.valueOf(set.getInt("id")),
                 set.getString("name"),
                 set.getString("email"),
-                set.getString("email_verified_at"),
                 set.getString("password"),
                 set.getString("estilo"),
-                set.getString("fuente"),
-                set.getString("remember_token"),
                 set.getString("created_at"),
                 set.getString("updated_at"),
             });
@@ -125,11 +133,8 @@ public class DUsers {
                 String.valueOf(set.getInt("id")),
                 set.getString("name"),
                 set.getString("email"),
-                set.getString("email_verified_at"),
                 set.getString("password"),
                 set.getString("estilo"),
-                set.getString("fuente"),
-                set.getString("remember_token"),
                 set.getString("created_at"),
                 set.getString("updated_at"),
             };
@@ -154,11 +159,8 @@ public class DUsers {
                 String.valueOf(set.getInt("id")),
                 set.getString("name"),
                 set.getString("email"),
-                set.getString("email_verified_at"),
                 set.getString("password"),
                 set.getString("estilo"),
-                set.getString("fuente"),
-                set.getString("remember_token"),
                 set.getString("created_at"),
                 set.getString("updated_at"),
             };
@@ -173,6 +175,8 @@ public class DUsers {
     
     
     public int getIdByEmail(String email) throws SQLException{
+        return 2;
+        /*
         int i=-1;
         String sql="SELECT * FROM users WHERE email=?";
         PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
@@ -188,6 +192,7 @@ public class DUsers {
             throw new SQLException();
         } 
         return i;
+        */
     }
     
     
@@ -252,12 +257,12 @@ public class DUsers {
         this.remember_token = remember_token;
     }
 
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
+    public void setCreated_at() {
+        this.created_at = DateString.StringToDateActual();
     }
 
-    public void setUpdated_at(String updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdated_at() {
+        this.updated_at = DateString.StringToDateActual();
     }
 
     public void desconectar() {

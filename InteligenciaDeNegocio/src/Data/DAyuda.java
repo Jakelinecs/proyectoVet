@@ -172,7 +172,8 @@ public class DAyuda {
 
     public List<String[]> listar(String get) throws SQLException {
         List<String[]> lista = new ArrayList<>();
-        String sql = "SELECT * FROM ayuda WHERE comando = "+get+" ;";
+        String to = "'%" + get + "%'";
+        String sql = "SELECT * FROM ayuda WHERE(ejemplo like " + to + " )";
         PreparedStatement ps = new ClientPsql().conectar().prepareStatement(sql);
         ResultSet set = ps.executeQuery();
         while (set.next()) {
